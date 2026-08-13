@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>鎴戠殑涓汉涓婚〉</title>
+<title>我的个人主页</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--glass:rgba(255,255,255,.15);--border:rgba(255,255,255,.3);--accent:#6366f1;--accent2:#818cf8}
@@ -20,7 +20,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Micr
 @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1}}
 .back{display:inline-flex;align-items:center;gap:6px;background:var(--glass);backdrop-filter:blur(10px);border:1px solid var(--border);border-radius:10px;padding:8px 16px;color:#fff;cursor:pointer;font-size:14px;margin-bottom:20px}
 .page-title{color:#fff;font-size:26px;font-weight:600;margin-bottom:20px;text-shadow:0 2px 10px rgba(0,0,0,.2)}
-/* 涓婚〉缃戞牸 */
+/* 主页网格 */
 .home-grid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto 1fr auto;gap:16px;grid-template-areas:"profile music" "works gallery" "works blog" "calendar calendar";min-height:80vh}
 .card{background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:18px;padding:20px;cursor:pointer;transition:.3s;box-shadow:0 8px 32px rgba(0,0,0,.1);overflow:hidden;position:relative}
 .card:hover{transform:translateY(-4px);background:rgba(255,255,255,.22)}
@@ -30,7 +30,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Micr
 .card-gallery{grid-area:gallery}
 .card-blog{grid-area:blog}
 .card-calendar{grid-area:calendar}
-/* 鑷垜浠嬬粛鍗?*/
+/* 自我介绍卡 */
 .profile-card-inner{display:flex;gap:14px;height:100%}
 .profile-avatar{width:64px;height:64px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,.5);flex-shrink:0;background:linear-gradient(135deg,#667eea,#764ba2);display:flex;align-items:center;justify-content:center;color:#fff;font-size:24px}
 .profile-right{flex:1;min-width:0;display:flex;flex-direction:column}
@@ -39,7 +39,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Micr
 .profile-social{display:flex;gap:8px;margin-top:8px}
 .social-icon{width:28px;height:28px;border-radius:8px;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;cursor:pointer;text-decoration:none;transition:.2s}
 .social-icon:hover{background:rgba(255,255,255,.35)}
-/* 闊充箰鍗?*/
+/* 音乐卡 */
 .music-card-inner{display:flex;flex-direction:column;height:100%;gap:10px}
 .music-top{display:flex;align-items:center;gap:12px}
 .music-cover{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,#f093fb,#f5576c);display:flex;align-items:center;justify-content:center;color:#fff;font-size:22px;flex-shrink:0;overflow:hidden}
@@ -56,26 +56,26 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Micr
 .music-btn.play{width:36px;height:36px;background:linear-gradient(135deg,var(--accent),var(--accent2));font-size:14px}
 .music-vol{display:flex;align-items:center;gap:4px;color:#fff;font-size:12px}
 .music-vol input{width:50px;cursor:pointer}
-/* 浣滃搧鍗?*/
+/* 作品卡 */
 .works-card-inner{height:100%;display:flex;flex-direction:column}
 .works-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;flex:1}
 .work-thumb{aspect-ratio:16/9;border-radius:10px;overflow:hidden;background:rgba(255,255,255,.12);position:relative}
 .work-thumb img{width:100%;height:100%;object-fit:cover}
 .work-thumb-title{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.7));color:#fff;font-size:11px;padding:12px 8px 6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .work-empty{display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.4);font-size:12px;grid-column:span 2}
-/* 鍥惧簱鍗?*/
+/* 图库卡 */
 .gallery-card-inner{height:100%}
 .gallery-thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;height:100%}
 .gallery-thumb{aspect-ratio:1;border-radius:8px;overflow:hidden;background:rgba(255,255,255,.12)}
 .gallery-thumb img{width:100%;height:100%;object-fit:cover}
-/* 鏃ュ父鍗?*/
+/* 日常卡 */
 .blog-card-inner{height:100%;position:relative;border-radius:12px;overflow:hidden}
 .blog-card-img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
 .blog-card-overlay{position:absolute;inset:0;background:linear-gradient(transparent 40%,rgba(0,0,0,.8));display:flex;flex-direction:column;justify-content:flex-end;padding:14px}
 .blog-card-date{color:rgba(255,255,255,.7);font-size:11px;margin-bottom:4px}
 .blog-card-text{color:#fff;font-size:13px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .blog-card-noimg{color:rgba(255,255,255,.6);font-size:13px;text-align:center;padding:20px}
-/* 鏃ュ巻鍗?*/
+/* 日历卡 */
 .calendar-card-inner{display:flex;align-items:center;gap:20px;height:100%}
 .cal-left{display:flex;flex-direction:column;align-items:center;gap:4px}
 .cal-date-row{display:flex;align-items:baseline;gap:6px}
@@ -88,9 +88,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Micr
 .cal-cell.today{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;font-weight:600;box-shadow:0 2px 10px rgba(99,102,241,.5)}
 .cal-cell .mood{font-size:10px;line-height:1}
 .cal-cell .star{position:absolute;top:1px;right:2px;font-size:8px}
-/* 鐜荤拑闈㈡澘 */
+/* 玻璃面板 */
 .panel{background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:18px;padding:28px;box-shadow:0 8px 32px rgba(0,0,0,.1)}
-/* 琛ㄥ崟 */
+/* 表单 */
 .field{margin-bottom:14px;text-align:left}
 .field label{display:block;color:rgba(255,255,255,.8);font-size:13px;margin-bottom:5px}
 .field input,.field textarea{width:100%;padding:9px 12px;border-radius:10px;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.15);color:#fff;font-size:14px;outline:none;font-family:inherit}
@@ -99,14 +99,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Micr
 .field input::placeholder,.field textarea::placeholder{color:rgba(255,255,255,.4)}
 .save-btn{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;padding:10px 28px;border-radius:10px;font-size:14px;cursor:pointer;transition:.3s}
 .save-btn:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(99,102,241,.4)}
-/* 鎼滅储 */
+/* 搜索 */
 .toolbar{display:flex;gap:12px;margin-bottom:18px;flex-wrap:wrap;align-items:center}
 .search{flex:1;min-width:180px;position:relative}
 .search input{width:100%;padding:9px 12px 9px 34px;border-radius:10px;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.15);color:#fff;font-size:14px;outline:none}
 .search input::placeholder{color:rgba(255,255,255,.4)}
-.search::before{content:'馃攳';position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:13px}
+.search::before{content:'🔍';position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:13px}
 .add-btn{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;padding:9px 18px;border-radius:10px;font-size:13px;cursor:pointer;white-space:nowrap}
-/* 浣滃搧璇︽儏 */
+/* 作品详情 */
 .works-list{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 @media(max-width:768px){.works-list{grid-template-columns:1fr}.home-grid{grid-template-columns:1fr;grid-template-areas:"profile" "music" "works" "gallery" "blog" "calendar"}}
 .work-card{background:rgba(255,255,255,.1);border-radius:14px;overflow:hidden;transition:.3s}
@@ -124,7 +124,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Micr
 .work-actions{display:flex;gap:4px}
 .work-act-btn{background:rgba(255,255,255,.15);border:none;color:#fff;width:26px;height:26px;border-radius:6px;cursor:pointer;font-size:12px}
 .work-act-btn:hover{background:rgba(255,255,255,.3)}
-/* 鍥惧簱璇︽儏 */
+/* 图库详情 */
 .tags-bar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;max-height:60px;overflow-y:auto}
 .tag-chip{background:rgba(99,102,241,.3);color:#fff;padding:4px 10px;border-radius:6px;font-size:12px;cursor:pointer;transition:.2s}
 .tag-chip:hover,.tag-chip.active{background:rgba(99,102,241,.6)}
@@ -139,7 +139,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Micr
 .gallery-del:hover{color:#ef4444}
 .gallery-item-tags{display:flex;flex-wrap:wrap;gap:3px}
 .gallery-item-tag{background:rgba(99,102,241,.3);color:rgba(255,255,255,.9);padding:1px 6px;border-radius:4px;font-size:10px}
-/* 鍗氬璇︽儏 */
+/* 博客详情 */
 .blog-list{display:flex;flex-direction:column;gap:14px}
 .blog-item{background:rgba(255,255,255,.1);border-radius:14px;padding:18px;cursor:pointer;transition:.3s}
 .blog-item:hover{background:rgba(255,255,255,.18)}
@@ -151,7 +151,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Micr
 .blog-item-full{color:rgba(255,255,255,.9);font-size:14px;line-height:1.7;white-space:pre-wrap}
 .blog-item-img{margin-top:10px;border-radius:8px;max-width:100%;max-height:250px;object-fit:cover;cursor:pointer}
 .blog-expand{color:var(--accent2);font-size:12px;margin-top:6px}
-/* 鏃ュ巻璇︽儏 */
+/* 日历详情 */
 .cal-detail-wrap{background:rgba(255,255,255,.08);border-radius:14px;padding:20px}
 .cal-detail-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
 .cal-nav-btn{background:rgba(255,255,255,.2);border:none;width:32px;height:32px;border-radius:8px;color:#fff;cursor:pointer;font-size:15px}
@@ -186,7 +186,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Micr
 .sched-del{color:rgba(255,255,255,.4);cursor:pointer;font-size:14px}
 .sched-del:hover{color:#ef4444}
 .sched-empty{color:rgba(255,255,255,.4);font-size:13px;text-align:center;padding:10px}
-/* 闊充箰璇︽儏 */
+/* 音乐详情 */
 .music-detail{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 @media(max-width:768px){.music-detail{grid-template-columns:1fr}}
 .player-main{text-align:center}
@@ -222,7 +222,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Micr
 .pl-item:hover .pl-act{opacity:1}
 .pl-act:hover{background:rgba(255,255,255,.25)}
 .pl-empty{color:rgba(255,255,255,.5);text-align:center;padding:30px;font-size:13px}
-/* 寮圭獥 */
+/* 弹窗 */
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);z-index:2000;display:none;align-items:center;justify-content:center;padding:20px}
 .modal.show{display:flex}
 .modal-box{background:rgba(30,30,50,.95);border:1px solid rgba(255,255,255,.2);border-radius:16px;padding:24px;max-width:460px;width:100%;max-height:90vh;overflow-y:auto;animation:min .3s}
@@ -237,7 +237,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Micr
 .img-ph{color:rgba(255,255,255,.4);font-size:13px}
 .file-label{display:inline-block;padding:7px 14px;border-radius:8px;background:rgba(255,255,255,.15);color:#fff;cursor:pointer;font-size:12px}
 .file-label input{display:none}
-/* 鐏 */
+/* 灯箱 */
 .lightbox{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:3000;display:none;align-items:center;justify-content:center;cursor:zoom-out;padding:30px}
 .lightbox.show{display:flex}
 .lightbox img{max-width:100%;max-height:100%;object-fit:contain;border-radius:6px}
@@ -261,20 +261,20 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Micr
 <div class="bg" id="bg"></div>
 <div class="toast" id="toast"></div>
 <div class="bg-set">
-<label style="display:flex;align-items:center;gap:5px;font-size:12px">閫忔槑搴?input type="range" id="bgOpacity" min="0.1" max="1" step="0.05" value="0.6"></label>
-<button onclick="document.getElementById('bgFile').click()">馃柤锔?鑳屾櫙</button>
+<label style="display:flex;align-items:center;gap:5px;font-size:12px">透明度<input type="range" id="bgOpacity" min="0.1" max="1" step="0.05" value="0.6"></label>
+<button onclick="document.getElementById('bgFile').click()">🖼️ 背景</button>
 <input type="file" id="bgFile" class="hidden" accept="image/*">
 </div>
 <div class="container">
-<!-- 涓婚〉 -->
+<!-- 主页 -->
 <div class="view active" id="view-home">
 <div class="home-grid">
 <div class="card card-profile" onclick="showView('profile')">
 <div class="profile-card-inner">
-<div class="profile-avatar" id="homeAvatar">馃懁</div>
+<div class="profile-avatar" id="homeAvatar">👤</div>
 <div class="profile-right">
-<div class="profile-name" id="homeName">璁剧疆鏄电О</div>
-<div class="profile-bio" id="homeBio">鐐瑰嚮缂栬緫涓汉绠€浠?..</div>
+<div class="profile-name" id="homeName">设置昵称</div>
+<div class="profile-bio" id="homeBio">点击编辑个人简介...</div>
 <div class="profile-social" id="homeSocial"></div>
 </div>
 </div>
@@ -282,9 +282,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Micr
 <div class="card card-music" onclick="showView('music')">
 <div class="music-card-inner" onclick="event.stopPropagation()">
 <div class="music-top">
-<div class="music-cover" id="homeMCover">鈾?/div>
+<div class="music-cover" id="homeMCover">♪</div>
 <div class="music-info">
-<div class="music-name" id="homeMName">鏆傛棤姝屾洸</div>
+<div class="music-name" id="homeMName">暂无歌曲</div>
 </div>
 </div>
 <div class="music-progress" onclick="event.stopPropagation();seekHome(event)">
@@ -292,11 +292,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Micr
 </div>
 <div class="music-bottom">
 <div class="music-ctrls">
-<button class="music-btn" onclick="prevSong()">鈴?/button>
-<button class="music-btn play" id="homePlayBtn" onclick="togglePlay()">鈻?/button>
-<button class="music-btn" onclick="nextSong()">鈴?/button>
+<button class="music-btn" onclick="prevSong()">⏮</button>
+<button class="music-btn play" id="homePlayBtn" onclick="togglePlay()">▶</button>
+<button class="music-btn" onclick="nextSong()">⏭</button>
 </div>
-<div class="music-vol">馃攰<input type="range" min="0" max="1" step="0.05" value="0.8" oninput="setVol(this.value)"></div>
+<div class="music-vol">🔊<input type="range" min="0" max="1" step="0.05" value="0.8" oninput="setVol(this.value)"></div>
 </div>
 </div>
 </div>
@@ -328,176 +328,176 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Micr
 </div>
 </div>
 </div>
-<!-- 鑷垜浠嬬粛 -->
+<!-- 自我介绍 -->
 <div class="view" id="view-profile">
-<button class="back" onclick="showView('home')">鈫?杩斿洖</button>
-<h2 class="page-title">涓汉璧勬枡</h2>
+<button class="back" onclick="showView('home')">← 返回</button>
+<h2 class="page-title">个人资料</h2>
 <div class="panel profile-detail">
 <div class="avatar-lg-wrap">
-<div class="avatar-lg" id="pAvatar" style="background:linear-gradient(135deg,#667eea,#764ba2);display:flex;align-items:center;justify-content:center;color:#fff;font-size:40px" onclick="document.getElementById('avatarFile').click()">馃懁</div>
-<div class="avatar-edit" onclick="document.getElementById('avatarFile').click()">馃摲</div>
+<div class="avatar-lg" id="pAvatar" style="background:linear-gradient(135deg,#667eea,#764ba2);display:flex;align-items:center;justify-content:center;color:#fff;font-size:40px" onclick="document.getElementById('avatarFile').click()">👤</div>
+<div class="avatar-edit" onclick="document.getElementById('avatarFile').click()">📷</div>
 <input type="file" id="avatarFile" class="hidden" accept="image/*">
 </div>
-<div class="name" id="pNameShow">鏄电О</div>
-<div class="bio" id="pBioShow">涓汉绠€浠?/div>
-<div class="field"><label>鏄电О</label><input type="text" id="pName" placeholder="璇疯緭鍏ユ樀绉?></div>
-<div class="field"><label>涓汉绠€浠?/label><textarea id="pBio" placeholder="浠嬬粛涓€涓嬭嚜宸?.."></textarea></div>
+<div class="name" id="pNameShow">昵称</div>
+<div class="bio" id="pBioShow">个人简介</div>
+<div class="field"><label>昵称</label><input type="text" id="pName" placeholder="请输入昵称"></div>
+<div class="field"><label>个人简介</label><textarea id="pBio" placeholder="介绍一下自己..."></textarea></div>
 <div class="two-col">
-<div class="field"><label>QQ鍙?/label><input type="text" id="pQQ" placeholder="QQ"></div>
-<div class="field"><label>寰俊鍙?/label><input type="text" id="pWechat" placeholder="寰俊"></div>
+<div class="field"><label>QQ号</label><input type="text" id="pQQ" placeholder="QQ"></div>
+<div class="field"><label>微信号</label><input type="text" id="pWechat" placeholder="微信"></div>
 </div>
-<div class="field"><label>B绔欓摼鎺?/label><div class="link-row"><input type="text" id="pBili" placeholder="https://space.bilibili.com/..."><button class="link-go" onclick="openLink('bili')">璺宠浆 鈫?/button></div></div>
-<div class="field"><label>寰俊鍏紬鍙?/label><div class="link-row"><input type="text" id="pOff" placeholder="鍏紬鍙烽摼鎺?><button class="link-go" onclick="openLink('off')">璺宠浆 鈫?/button></div></div>
-<button class="save-btn" onclick="saveProfile()">馃捑 淇濆瓨</button>
+<div class="field"><label>B站链接</label><div class="link-row"><input type="text" id="pBili" placeholder="https://space.bilibili.com/..."><button class="link-go" onclick="openLink('bili')">跳转 ↗</button></div></div>
+<div class="field"><label>微信公众号</label><div class="link-row"><input type="text" id="pOff" placeholder="公众号链接"><button class="link-go" onclick="openLink('off')">跳转 ↗</button></div></div>
+<button class="save-btn" onclick="saveProfile()">💾 保存</button>
 </div>
 </div>
-<!-- 闊充箰 -->
+<!-- 音乐 -->
 <div class="view" id="view-music">
-<button class="back" onclick="showView('home')">鈫?杩斿洖</button>
-<h2 class="page-title">闊充箰鎾斁鍣?/h2>
+<button class="back" onclick="showView('home')">← 返回</button>
+<h2 class="page-title">音乐播放器</h2>
 <div class="panel">
 <div class="music-detail">
 <div class="player-main">
-<div class="player-cover" id="pCover">鈾?/div>
-<div class="player-title" id="pTitle">鏆傛棤姝屾洸</div>
-<div class="player-artist" id="pArtist">瀵煎叆姝屾洸寮€濮嬫挱鏀?/div>
+<div class="player-cover" id="pCover">♪</div>
+<div class="player-title" id="pTitle">暂无歌曲</div>
+<div class="player-artist" id="pArtist">导入歌曲开始播放</div>
 <div class="player-progress">
 <div class="player-track" onclick="seekPlayer(event)"><div class="player-fill" id="pFill"></div></div>
 <div class="player-time"><span id="pCur">0:00</span><span id="pDur">0:00</span></div>
 </div>
 <div class="player-ctrls">
-<button class="p-btn" onclick="prevSong()">鈴?/button>
-<button class="p-btn play" id="pPlayBtn" onclick="togglePlay()">鈻?/button>
-<button class="p-btn" onclick="nextSong()">鈴?/button>
+<button class="p-btn" onclick="prevSong()">⏮</button>
+<button class="p-btn play" id="pPlayBtn" onclick="togglePlay()">▶</button>
+<button class="p-btn" onclick="nextSong()">⏭</button>
 </div>
-<div class="player-vol">馃攰<input type="range" id="pVol" min="0" max="1" step="0.05" value="0.8" oninput="setVol(this.value)"></div>
+<div class="player-vol">🔊<input type="range" id="pVol" min="0" max="1" step="0.05" value="0.8" oninput="setVol(this.value)"></div>
 </div>
 <div>
 <div class="playlist-head">
-<div class="playlist-title">姝屽崟</div>
-<button class="import-btn" onclick="document.getElementById('songFile').click()">+ 瀵煎叆姝屾洸</button>
+<div class="playlist-title">歌单</div>
+<button class="import-btn" onclick="document.getElementById('songFile').click()">+ 导入歌曲</button>
 <input type="file" id="songFile" class="hidden" accept=".mp3,.m4a,.wav,audio/*" multiple>
 </div>
-<div class="playlist" id="playlist"><div class="pl-empty">鏆傛棤姝屾洸</div></div>
+<div class="playlist" id="playlist"><div class="pl-empty">暂无歌曲</div></div>
 </div>
 </div>
 </div>
 </div>
-<!-- 浣滃搧 -->
+<!-- 作品 -->
 <div class="view" id="view-works">
-<button class="back" onclick="showView('home')">鈫?杩斿洖</button>
-<h2 class="page-title">涓汉浣滃搧</h2>
+<button class="back" onclick="showView('home')">← 返回</button>
+<h2 class="page-title">个人作品</h2>
 <div class="panel">
 <div class="toolbar">
-<div class="search"><input type="text" id="workSearch" placeholder="鎼滅储浣滃搧..." oninput="renderWorks()"></div>
-<button class="add-btn" onclick="openWorkModal()">+ 娣诲姞浣滃搧</button>
+<div class="search"><input type="text" id="workSearch" placeholder="搜索作品..." oninput="renderWorks()"></div>
+<button class="add-btn" onclick="openWorkModal()">+ 添加作品</button>
 </div>
-<div class="works-list" id="worksList"><div class="empty"><div class="empty-icon">馃捈</div>鏆傛棤浣滃搧</div></div>
+<div class="works-list" id="worksList"><div class="empty"><div class="empty-icon">💼</div>暂无作品</div></div>
 </div>
 </div>
-<!-- 鍥惧簱 -->
+<!-- 图库 -->
 <div class="view" id="view-gallery">
-<button class="back" onclick="showView('home')">鈫?杩斿洖</button>
-<h2 class="page-title">鍥惧簱</h2>
+<button class="back" onclick="showView('home')">← 返回</button>
+<h2 class="page-title">图库</h2>
 <div class="panel">
 <div class="toolbar">
-<div class="search"><input type="text" id="galSearch" placeholder="鎼滅储鏍囬鎴栨爣绛?.." oninput="renderGallery()"></div>
-<button class="add-btn" onclick="openGalModal()">+ 涓婁紶鍥剧墖</button>
+<div class="search"><input type="text" id="galSearch" placeholder="搜索标题或标签..." oninput="renderGallery()"></div>
+<button class="add-btn" onclick="openGalModal()">+ 上传图片</button>
 </div>
 <div class="tags-bar" id="tagsBar"></div>
 <div class="gallery-masonry" id="galList"></div>
 </div>
 </div>
-<!-- 鏃ュ父 -->
+<!-- 日常 -->
 <div class="view" id="view-blog">
-<button class="back" onclick="showView('home')">鈫?杩斿洖</button>
-<h2 class="page-title">鐢熸椿鏃ュ父</h2>
+<button class="back" onclick="showView('home')">← 返回</button>
+<h2 class="page-title">生活日常</h2>
 <div class="panel">
 <div class="toolbar">
-<div class="search"><input type="text" id="blogSearch" placeholder="鎼滅储鏃ユ湡鎴栧唴瀹?.." oninput="renderBlog()"></div>
-<button class="add-btn" onclick="openBlogModal()">+ 鍙戝竷鏃ュ父</button>
+<div class="search"><input type="text" id="blogSearch" placeholder="搜索日期或内容..." oninput="renderBlog()"></div>
+<button class="add-btn" onclick="openBlogModal()">+ 发布日常</button>
 </div>
-<div class="blog-list" id="blogList"><div class="empty"><div class="empty-icon">馃摑</div>鏆傛棤鏃ュ父</div></div>
+<div class="blog-list" id="blogList"><div class="empty"><div class="empty-icon">📝</div>暂无日常</div></div>
 </div>
 </div>
-<!-- 鏃ュ巻 -->
+<!-- 日历 -->
 <div class="view" id="view-calendar">
-<button class="back" onclick="showView('home')">鈫?杩斿洖</button>
-<h2 class="page-title">鏃ュ巻蹇冩儏</h2>
+<button class="back" onclick="showView('home')">← 返回</button>
+<h2 class="page-title">日历心情</h2>
 <div class="panel">
 <div class="cal-detail-wrap">
 <div class="cal-detail-head">
-<button class="cal-nav-btn" onclick="changeMonth(-1)">鈥?/button>
-<div class="cal-detail-title" id="calTitle">2026骞?鏈?/div>
-<button class="cal-nav-btn" onclick="changeMonth(1)">鈥?/button>
+<button class="cal-nav-btn" onclick="changeMonth(-1)">‹</button>
+<div class="cal-detail-title" id="calTitle">2026年7月</div>
+<button class="cal-nav-btn" onclick="changeMonth(1)">›</button>
 </div>
 <div class="cal-weekdays">
-<div class="cal-wd">鏃?/div><div class="cal-wd">涓€</div><div class="cal-wd">浜?/div><div class="cal-wd">涓?/div><div class="cal-wd">鍥?/div><div class="cal-wd">浜?/div><div class="cal-wd">鍏?/div>
+<div class="cal-wd">日</div><div class="cal-wd">一</div><div class="cal-wd">二</div><div class="cal-wd">三</div><div class="cal-wd">四</div><div class="cal-wd">五</div><div class="cal-wd">六</div>
 </div>
 <div class="cal-days" id="calDays"></div>
 </div>
 <div class="cal-day-detail" id="calDayDetail">
-<div class="cal-day-detail-title" id="calDayTitle">閫夋嫨鏃ユ湡</div>
+<div class="cal-day-detail-title" id="calDayTitle">选择日期</div>
 <div class="mood-btns">
-<button class="mood-btn" data-mood="happy" onclick="setMood('happy')"><span class="emoji">馃槉</span>楂樺叴</button>
-<button class="mood-btn" data-mood="neutral" onclick="setMood('neutral')"><span class="emoji">馃槓</span>鏃犳劅</button>
-<button class="mood-btn" data-mood="sad" onclick="setMood('sad')"><span class="emoji">馃槩</span>浼ゅ績</button>
+<button class="mood-btn" data-mood="happy" onclick="setMood('happy')"><span class="emoji">😊</span>高兴</button>
+<button class="mood-btn" data-mood="neutral" onclick="setMood('neutral')"><span class="emoji">😐</span>无感</button>
+<button class="mood-btn" data-mood="sad" onclick="setMood('sad')"><span class="emoji">😢</span>伤心</button>
 </div>
-<div style="color:rgba(255,255,255,.85);font-size:13px;margin-bottom:8px">鏃ョ▼瀹夋帓</div>
+<div style="color:rgba(255,255,255,.85);font-size:13px;margin-bottom:8px">日程安排</div>
 <div class="sched-input-row">
-<input type="text" id="schedInput" placeholder="娣诲姞鏃ョ▼..." onkeydown="if(event.key==='Enter')addSched()">
-<button class="sched-add" onclick="addSched()">娣诲姞</button>
+<input type="text" id="schedInput" placeholder="添加日程..." onkeydown="if(event.key==='Enter')addSched()">
+<button class="sched-add" onclick="addSched()">添加</button>
 </div>
-<div class="sched-list" id="schedList"><div class="sched-empty">鏆傛棤鏃ョ▼</div></div>
-</div>
-</div>
+<div class="sched-list" id="schedList"><div class="sched-empty">暂无日程</div></div>
 </div>
 </div>
-<!-- 浣滃搧寮圭獥 -->
+</div>
+</div>
+<!-- 作品弹窗 -->
 <div class="modal" id="workModal">
 <div class="modal-box">
-<div class="modal-title">娣诲姞浣滃搧</div>
-<div class="field"><label>灏侀潰鍥?/label><div class="img-preview" id="workPrev"><span class="img-ph">鏈€夋嫨</span></div><label class="file-label">閫夋嫨鍥剧墖<input type="file" id="workImg" accept="image/*" onchange="previewImg(this,'workPrev')"></label></div>
-<div class="field"><label>浣滃搧鏍囬</label><input type="text" id="workTitle" placeholder="浣滃搧鏍囬"></div>
-<div class="field"><label>璺宠浆閾炬帴</label><input type="text" id="workLink" placeholder="https://..."></div>
-<div class="modal-actions"><button class="m-btn cancel" onclick="closeModal('workModal')">鍙栨秷</button><button class="m-btn confirm" onclick="saveWork()">淇濆瓨</button></div>
+<div class="modal-title">添加作品</div>
+<div class="field"><label>封面图</label><div class="img-preview" id="workPrev"><span class="img-ph">未选择</span></div><label class="file-label">选择图片<input type="file" id="workImg" accept="image/*" onchange="previewImg(this,'workPrev')"></label></div>
+<div class="field"><label>作品标题</label><input type="text" id="workTitle" placeholder="作品标题"></div>
+<div class="field"><label>跳转链接</label><input type="text" id="workLink" placeholder="https://..."></div>
+<div class="modal-actions"><button class="m-btn cancel" onclick="closeModal('workModal')">取消</button><button class="m-btn confirm" onclick="saveWork()">保存</button></div>
 </div>
 </div>
-<!-- 鍥惧簱寮圭獥 -->
+<!-- 图库弹窗 -->
 <div class="modal" id="galModal">
 <div class="modal-box">
-<div class="modal-title">涓婁紶鍥剧墖</div>
-<div class="field"><label>鍥剧墖</label><div class="img-preview" id="galPrev"><span class="img-ph">鏈€夋嫨</span></div><label class="file-label">閫夋嫨鍥剧墖<input type="file" id="galImg" accept="image/*" onchange="previewImg(this,'galPrev')"></label></div>
-<div class="field"><label>鏍囬</label><input type="text" id="galTitle" placeholder="鍥剧墖鏍囬"></div>
-<div class="field"><label>鏍囩锛堥€楀彿鍒嗛殧锛?/label><input type="text" id="galTags" placeholder="椋庢櫙, 鏃呰"></div>
-<div class="modal-actions"><button class="m-btn cancel" onclick="closeModal('galModal')">鍙栨秷</button><button class="m-btn confirm" onclick="saveGal()">淇濆瓨</button></div>
+<div class="modal-title">上传图片</div>
+<div class="field"><label>图片</label><div class="img-preview" id="galPrev"><span class="img-ph">未选择</span></div><label class="file-label">选择图片<input type="file" id="galImg" accept="image/*" onchange="previewImg(this,'galPrev')"></label></div>
+<div class="field"><label>标题</label><input type="text" id="galTitle" placeholder="图片标题"></div>
+<div class="field"><label>标签（逗号分隔）</label><input type="text" id="galTags" placeholder="风景, 旅行"></div>
+<div class="modal-actions"><button class="m-btn cancel" onclick="closeModal('galModal')">取消</button><button class="m-btn confirm" onclick="saveGal()">保存</button></div>
 </div>
 </div>
-<!-- 鏃ュ父寮圭獥 -->
+<!-- 日常弹窗 -->
 <div class="modal" id="blogModal">
 <div class="modal-box">
-<div class="modal-title">鍙戝竷鏃ュ父</div>
-<div class="field"><label>鏃ユ湡</label><input type="date" id="blogDate"></div>
-<div class="field"><label>鍐呭</label><textarea id="blogContent" placeholder="璁板綍鐢熸椿..."></textarea></div>
-<div class="field"><label>閰嶅浘锛堝彲閫夛級</label><div class="img-preview" id="blogPrev" style="aspect-ratio:auto;max-height:160px"><span class="img-ph">鏈€夋嫨</span></div><label class="file-label">閫夋嫨鍥剧墖<input type="file" id="blogImg" accept="image/*" onchange="previewImg(this,'blogPrev')"></label></div>
-<div class="modal-actions"><button class="m-btn cancel" onclick="closeModal('blogModal')">鍙栨秷</button><button class="m-btn confirm" onclick="saveBlog()">鍙戝竷</button></div>
+<div class="modal-title">发布日常</div>
+<div class="field"><label>日期</label><input type="date" id="blogDate"></div>
+<div class="field"><label>内容</label><textarea id="blogContent" placeholder="记录生活..."></textarea></div>
+<div class="field"><label>配图（可选）</label><div class="img-preview" id="blogPrev" style="aspect-ratio:auto;max-height:160px"><span class="img-ph">未选择</span></div><label class="file-label">选择图片<input type="file" id="blogImg" accept="image/*" onchange="previewImg(this,'blogPrev')"></label></div>
+<div class="modal-actions"><button class="m-btn cancel" onclick="closeModal('blogModal')">取消</button><button class="m-btn confirm" onclick="saveBlog()">发布</button></div>
 </div>
 </div>
-<!-- 姝屾洸灏侀潰寮圭獥 -->
+<!-- 歌曲封面弹窗 -->
 <div class="modal" id="coverModal">
 <div class="modal-box">
-<div class="modal-title">缂栬緫姝屾洸</div>
-<div class="field"><label>姝屾洸鍚?/label><input type="text" id="editSongName"></div>
-<div class="field"><label>姝屾墜</label><input type="text" id="editSongArtist"></div>
-<div class="field"><label>灏侀潰</label><div class="img-preview" id="coverPrev" style="aspect-ratio:1"><span class="img-ph">榛樿灏侀潰</span></div><label class="file-label">涓婁紶灏侀潰<input type="file" id="coverImg" accept="image/*" onchange="previewImg(this,'coverPrev')"></label></div>
-<div class="modal-actions"><button class="m-btn cancel" onclick="closeModal('coverModal')">鍙栨秷</button><button class="m-btn confirm" onclick="saveSongEdit()">淇濆瓨</button></div>
+<div class="modal-title">编辑歌曲</div>
+<div class="field"><label>歌曲名</label><input type="text" id="editSongName"></div>
+<div class="field"><label>歌手</label><input type="text" id="editSongArtist"></div>
+<div class="field"><label>封面</label><div class="img-preview" id="coverPrev" style="aspect-ratio:1"><span class="img-ph">默认封面</span></div><label class="file-label">上传封面<input type="file" id="coverImg" accept="image/*" onchange="previewImg(this,'coverPrev')"></label></div>
+<div class="modal-actions"><button class="m-btn cancel" onclick="closeModal('coverModal')">取消</button><button class="m-btn confirm" onclick="saveSongEdit()">保存</button></div>
 </div>
 </div>
-<!-- 鐏 -->
-<div class="lightbox" id="lightbox" onclick="closeLightbox()"><span class="lightbox-close">脳</span><img id="lbImg" src=""></div>
+<!-- 灯箱 -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()"><span class="lightbox-close">×</span><img id="lbImg" src=""></div>
 <audio id="audio"></audio>
 <script>
-// 宸ュ叿鍑芥暟
+// 工具函数
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2000)}
 function showView(v){document.querySelectorAll('.view').forEach(e=>e.classList.remove('active'));document.getElementById('view-'+v).classList.add('active');window.scrollTo(0,0);if(v==='home')refreshHome();if(v==='calendar')renderCal()}
 function get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}}
@@ -505,130 +505,132 @@ function set(k,v){localStorage.setItem(k,JSON.stringify(v))}
 function fid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,6)}
 function fmt(s){if(isNaN(s))return'0:00';const m=Math.floor(s/60),x=Math.floor(s%60);return m+':'+(x<10?'0':'')+x}
 function f2b(f){return new Promise((r,j)=>{const a=new FileReader;a.onload=()=>r(a.result);a.onerror=j;a.readAsDataURL(f)})}
-// 鑳屾櫙
+// 背景
 const bg=document.getElementById('bg');
 function initBg(){const b=get('bgImg',''),o=get('bgOp',.6);if(b)bg.style.backgroundImage='url('+b+')';bg.style.opacity=o;document.getElementById('bgOpacity').value=o}
 document.getElementById('bgOpacity').oninput=e=>{bg.style.opacity=e.target.value;set('bgOp',e.target.value)};
-document.getElementById('bgFile').onchange=async e=>{if(!e.target.files[0])return;const b=await f2b(e.target.files[0]);bg.style.backgroundImage='url('+b+')';set('bgImg',b);toast('鑳屾櫙宸叉洿鎹?);e.target.value=''};
-// 鑷垜浠嬬粛
+document.getElementById('bgFile').onchange=async e=>{if(!e.target.files[0])return;const b=await f2b(e.target.files[0]);bg.style.backgroundImage='url('+b+')';set('bgImg',b);toast('背景已更换');e.target.value=''};
+// 自我介绍
 function loadProfile(){const p=get('profile',{name:'',bio:'',qq:'',wechat:'',bili:'',off:'',avatar:''});
 document.getElementById('pName').value=p.name||'';document.getElementById('pBio').value=p.bio||'';document.getElementById('pQQ').value=p.qq||'';document.getElementById('pWechat').value=p.wechat||'';document.getElementById('pBili').value=p.bili||'';document.getElementById('pOff').value=p.off||'';
-document.getElementById('pNameShow').textContent=p.name||'鏄电О';document.getElementById('pBioShow').textContent=p.bio||'涓汉绠€浠?;
-const av=document.getElementById('pAvatar');if(p.avatar)av.innerHTML='<img src="'+p.avatar+'" style="width:100%;height:100%;object-fit:cover;border-radius:50%">';else av.innerHTML='馃懁';
-// 涓婚〉
-const ha=document.getElementById('homeAvatar');if(p.avatar)ha.innerHTML='<img src="'+p.avatar+'" style="width:100%;height:100%;object-fit:cover;border-radius:50%">';else ha.innerHTML='馃懁';
-document.getElementById('homeName').textContent=p.name||'璁剧疆鏄电О';document.getElementById('homeBio').textContent=p.bio||'鐐瑰嚮缂栬緫涓汉绠€浠?..';
+document.getElementById('pNameShow').textContent=p.name||'昵称';document.getElementById('pBioShow').textContent=p.bio||'个人简介';
+const av=document.getElementById('pAvatar');if(p.avatar)av.innerHTML='<img src="'+p.avatar+'" style="width:100%;height:100%;object-fit:cover;border-radius:50%">';else av.innerHTML='👤';
+// 主页
+const ha=document.getElementById('homeAvatar');if(p.avatar)ha.innerHTML='<img src="'+p.avatar+'" style="width:100%;height:100%;object-fit:cover;border-radius:50%">';else ha.innerHTML='👤';
+document.getElementById('homeName').textContent=p.name||'设置昵称';document.getElementById('homeBio').textContent=p.bio||'点击编辑个人简介...';
 const sc=document.getElementById('homeSocial');sc.innerHTML='';
-if(p.bili)sc.innerHTML+='<a class="social-icon" href="'+(p.bili.startsWith('http')?p.bili:'https://'+p.bili)+'" target="_blank" onclick="event.stopPropagation()">馃摵</a>';
-if(p.off)sc.innerHTML+='<a class="social-icon" href="'+(p.off.startsWith('http')?p.off:'https://'+p.off)+'" target="_blank" onclick="event.stopPropagation()">馃摙</a>';
+if(p.bili)sc.innerHTML+='<a class="social-icon" href="'+(p.bili.startsWith('http')?p.bili:'https://'+p.bili)+'" target="_blank" onclick="event.stopPropagation()">📺</a>';
+if(p.off)sc.innerHTML+='<a class="social-icon" href="'+(p.off.startsWith('http')?p.off:'https://'+p.off)+'" target="_blank" onclick="event.stopPropagation()">📢</a>';
 }
-function saveProfile(){const p={name:document.getElementById('pName').value.trim(),bio:document.getElementById('pBio').value.trim(),qq:document.getElementById('pQQ').value.trim(),wechat:document.getElementById('pWechat').value.trim(),bili:document.getElementById('pBili').value.trim(),off:document.getElementById('pOff').value.trim(),avatar:get('profile',{}).avatar||''};set('profile',p);loadProfile();toast('宸蹭繚瀛?)}
-document.getElementById('avatarFile').onchange=async e=>{if(!e.target.files[0])return;const b=await f2b(e.target.files[0]);const p=get('profile',{});p.avatar=b;set('profile',p);loadProfile();toast('澶村儚宸叉洿鏂?);e.target.value=''};
-function openLink(t){const p=get('profile',{});let u=t==='bili'?p.bili:p.off;if(!u){toast('璇峰厛濉啓閾炬帴');return}if(!u.startsWith('http'))u='https://'+u;window.open(u,'_blank')}
-// 闊充箰
+function saveProfile(){const p={name:document.getElementById('pName').value.trim(),bio:document.getElementById('pBio').value.trim(),qq:document.getElementById('pQQ').value.trim(),wechat:document.getElementById('pWechat').value.trim(),bili:document.getElementById('pBili').value.trim(),off:document.getElementById('pOff').value.trim(),avatar:get('profile',{}).avatar||''};set('profile',p);loadProfile();toast('已保存')}
+document.getElementById('avatarFile').onchange=async e=>{if(!e.target.files[0])return;const b=await f2b(e.target.files[0]);const p=get('profile',{});p.avatar=b;set('profile',p);loadProfile();toast('头像已更新');e.target.value=''};
+function openLink(t){const p=get('profile',{});let u=t==='bili'?p.bili:p.off;if(!u){toast('请先填写链接');return}if(!u.startsWith('http'))u='https://'+u;window.open(u,'_blank')}
+// 音乐
 let songs=[],curIdx=-1,playing=false;
 const audio=document.getElementById('audio');
 function loadSongs(){songs=get('songs',[]);curIdx=get('curSong',-1);if(curIdx>=songs.length)curIdx=-1;renderPlaylist();updatePlayer()}
-function renderPlaylist(){const c=document.getElementById('playlist');if(!songs.length){c.innerHTML='<div class="pl-empty">鏆傛棤姝屾洸</div>';return}
+function renderPlaylist(){const c=document.getElementById('playlist');if(!songs.length){c.innerHTML='<div class="pl-empty">暂无歌曲</div>';return}
 c.innerHTML=songs.map((s,i)=>'<div class="pl-item '+(i===curIdx?'active':'')+'" onclick="playSong('+i+')">'+
-'<div class="pl-cover">'+(s.cover?'<img src="'+s.cover+'">':'鈾?)+'</div>'+
-'<div class="pl-info"><div class="pl-name" onclick="event.stopPropagation();openEditSong('+i+')">'+s.name+'</div><div class="pl-artist">'+(s.artist||'鏈煡')+'</div></div>'+
-'<div class="pl-actions"><button class="pl-act" onclick="event.stopPropagation();moveSong('+i+',-1)" title="涓婄Щ">鈫?/button><button class="pl-act" onclick="event.stopPropagation();moveSong('+i+',1)" title="涓嬬Щ">鈫?/button><button class="pl-act" onclick="event.stopPropagation();delSong('+i+')" title="鍒犻櫎">鉁?/button></div></div>').join('')}
-function updatePlayer(){const s=songs[curIdx];const tn=s?s.name:'鏆傛棤姝屾洸',ta=s?(s.artist||'鏈煡姝屾墜'):'瀵煎叆姝屾洸寮€濮嬫挱鏀?;
+'<div class="pl-cover">'+(s.cover?'<img src="'+s.cover+'">':'♪')+'</div>'+
+'<div class="pl-info"><div class="pl-name" onclick="event.stopPropagation();openEditSong('+i+')">'+s.name+'</div><div class="pl-artist">'+(s.artist||'未知')+'</div></div>'+
+'<div class="pl-actions"><button class="pl-act" onclick="event.stopPropagation();moveSong('+i+',-1)" title="上移">↑</button><button class="pl-act" onclick="event.stopPropagation();moveSong('+i+',1)" title="下移">↓</button><button class="pl-act" onclick="event.stopPropagation();delSong('+i+')" title="删除">✕</button></div></div>').join('')}
+function updatePlayer(){const s=songs[curIdx];const tn=s?s.name:'暂无歌曲',ta=s?(s.artist||'未知歌手'):'导入歌曲开始播放';
 document.getElementById('pTitle').textContent=tn;document.getElementById('pArtist').textContent=ta;
 document.getElementById('homeMName').textContent=tn;
 const pc=document.getElementById('pCover'),hc=document.getElementById('homeMCover');
-if(s&&s.cover){pc.innerHTML='<img src="'+s.cover+'">';hc.innerHTML='<img src="'+s.cover+'">'}else{pc.innerHTML='鈾?;hc.innerHTML='鈾?}
-document.getElementById('pPlayBtn').textContent=playing?'鈴?:'鈻?;document.getElementById('homePlayBtn').textContent=playing?'鈴?:'鈻?;
-// 婊氬姩
-const hn=document.getElementById('homeMName');if(tn.length>8){hn.classList.add('scroll');hn.innerHTML=tn+'銆€銆€銆€'+tn}else{hn.classList.remove('scroll');hn.textContent=tn}
+if(s&&s.cover){pc.innerHTML='<img src="'+s.cover+'">';hc.innerHTML='<img src="'+s.cover+'">'}else{pc.innerHTML='♪';hc.innerHTML='♪'}
+document.getElementById('pPlayBtn').textContent=playing?'⏸':'▶';document.getElementById('homePlayBtn').textContent=playing?'⏸':'▶';
+// 滚动
+const hn=document.getElementById('homeMName');if(tn.length>8){hn.classList.add('scroll');hn.innerHTML=tn+'　　　'+tn}else{hn.classList.remove('scroll');hn.textContent=tn}
 }
 function playSong(i){if(i<0||i>=songs.length)return;curIdx=i;set('curSong',i);audio.src=songs[i].data;audio.play().then(()=>playing=true).catch(()=>playing=false);updatePlayer();renderPlaylist()}
-function togglePlay(){if(!songs.length){toast('璇峰厛瀵煎叆姝屾洸');return}if(curIdx===-1){playSong(0);return}if(playing){audio.pause();playing=false}else{audio.play().catch(()=>{});playing=true}updatePlayer()}
+function togglePlay(){if(!songs.length){toast('请先导入歌曲');return}if(curIdx===-1){playSong(0);return}if(playing){audio.pause();playing=false}else{audio.play().catch(()=>{});playing=true}updatePlayer()}
 function prevSong(){if(!songs.length)return;playSong((curIdx-1+songs.length)%songs.length)}
 function nextSong(){if(!songs.length)return;playSong((curIdx+1)%songs.length)}
-function delSong(i){songs.splice(i,1);set('songs',songs);if(i===curIdx){audio.pause();playing=false;curIdx=-1;set('curSong',-1)}else if(i<curIdx){curIdx--;set('curSong',curIdx)}renderPlaylist();updatePlayer();toast('宸插垹闄?)}
+function delSong(i){songs.splice(i,1);set('songs',songs);if(i===curIdx){audio.pause();playing=false;curIdx=-1;set('curSong',-1)}else if(i<curIdx){curIdx--;set('curSong',curIdx)}renderPlaylist();updatePlayer();toast('已删除')}
 function moveSong(i,d){const j=i+d;if(j<0||j>=songs.length)return;[songs[i],songs[j]]=[songs[j],songs[i]];if(curIdx===i)curIdx=j;else if(curIdx===j)curIdx=i;set('songs',songs);set('curSong',curIdx);renderPlaylist();updatePlayer()}
 let editIdx=-1;
-function openEditSong(i){editIdx=i;document.getElementById('editSongName').value=songs[i].name;document.getElementById('editSongArtist').value=songs[i].artist||'';document.getElementById('coverPrev').innerHTML=songs[i].cover?'<img src="'+songs[i].cover+'">':'<span class="img-ph">榛樿灏侀潰</span>';document.getElementById('coverImg').value='';openModal('coverModal')}
-function saveSongEdit(){if(editIdx<0)return;songs[editIdx].name=document.getElementById('editSongName').value.trim()||'鏈懡鍚?;songs[editIdx].artist=document.getElementById('editSongArtist').value.trim();const cp=document.getElementById('coverPrev').querySelector('img');if(cp)songs[editIdx].cover=cp.src;set('songs',songs);renderPlaylist();updatePlayer();closeModal('coverModal');toast('宸蹭繚瀛?)}
-document.getElementById('songFile').onchange=async e=>{const fs=Array.from(e.target.files);for(const f of fs){const b=await f2b(f);songs.push({id:fid(),name:f.name.replace(/\.[^.]+$/,''),artist:'鏈湴闊充箰',data:b,cover:''})}set('songs',songs);renderPlaylist();toast('瀵煎叆'+fs.length+'棣?);e.target.value=''};
+function openEditSong(i){editIdx=i;document.getElementById('editSongName').value=songs[i].name;document.getElementById('editSongArtist').value=songs[i].artist||'';document.getElementById('coverPrev').innerHTML=songs[i].cover?'<img src="'+songs[i].cover+'">':'<span class="img-ph">默认封面</span>';document.getElementById('coverImg').value='';openModal('coverModal')}
+function saveSongEdit(){if(editIdx<0)return;songs[editIdx].name=document.getElementById('editSongName').value.trim()||'未命名';songs[editIdx].artist=document.getElementById('editSongArtist').value.trim();const cp=document.getElementById('coverPrev').querySelector('img');if(cp)songs[editIdx].cover=cp.src;set('songs',songs);renderPlaylist();updatePlayer();closeModal('coverModal');toast('已保存')}
+document.getElementById('songFile').onchange=async e=>{const fs=Array.from(e.target.files);for(const f of fs){const b=await f2b(f);songs.push({id:fid(),name:f.name.replace(/\.[^.]+$/,''),artist:'本地音乐',data:b,cover:''})}set('songs',songs);renderPlaylist();toast('导入'+fs.length+'首');e.target.value=''};
 audio.ontimeupdate=()=>{const p=(audio.currentTime/audio.duration)*100||0;document.getElementById('pFill').style.width=p+'%';document.getElementById('homeMProg').style.width=p+'%';document.getElementById('pCur').textContent=fmt(audio.currentTime)};
 audio.onloadedmetadata=()=>document.getElementById('pDur').textContent=fmt(audio.duration);
 audio.onended=nextSong;
 function seekPlayer(e){const r=e.currentTarget.getBoundingClientRect();audio.currentTime=((e.clientX-r.left)/r.width)*audio.duration||0}
 function seekHome(e){const r=e.currentTarget.getBoundingClientRect();audio.currentTime=((e.clientX-r.left)/r.width)*audio.duration||0}
 function setVol(v){audio.volume=v;document.getElementById('pVol').value=v}
-// 浣滃搧
+// 作品
 let works=[],workImgData='';
 function loadWorks(){works=get('works',[]);renderWorks();renderHomeWorks()}
 function renderWorks(){const q=document.getElementById('workSearch').value.toLowerCase();const list=works.filter(w=>w.title.toLowerCase().includes(q));const c=document.getElementById('worksList');
-if(!list.length){c.innerHTML='<div class="empty"><div class="empty-icon">馃捈</div>鏆傛棤浣滃搧</div>';return}
-c.innerHTML=list.map((w)=>{const i=works.indexOf(w);return '<div class="work-card"><div class="work-cover bili" onclick="toggleCover(this)"><div class="work-cover-ph">馃捈</div>'+(w.cover?'<img src="'+w.cover+'" style="display:none">':'')+'</div><div class="work-info"><div class="work-title">'+w.title+'</div><div class="work-row"><a class="work-link" href="'+(w.link||'#')+'" target="_blank" onclick="event.stopPropagation()">璺宠浆 鈫?/a><div class="work-actions"><button class="work-act-btn" onclick="moveWork('+i+',-1)">鈫?/button><button class="work-act-btn" onclick="moveWork('+i+',1)">鈫?/button><button class="work-act-btn" onclick="delWork('+i+')">鉁?/button></div></div></div></div>'}).join('')}
+if(!list.length){c.innerHTML='<div class="empty"><div class="empty-icon">💼</div>暂无作品</div>';return}
+c.innerHTML=list.map((w)=>{const i=works.indexOf(w);return '<div class="work-card"><div class="work-cover bili" onclick="toggleCover(this)"><div class="work-cover-ph">💼</div>'+(w.cover?'<img src="'+w.cover+'" style="display:none">':'')+'</div><div class="work-info"><div class="work-title">'+w.title+'</div><div class="work-row"><a class="work-link" href="'+(w.link||'#')+'" target="_blank" onclick="event.stopPropagation()">跳转 ↗</a><div class="work-actions"><button class="work-act-btn" onclick="moveWork('+i+',-1)">↑</button><button class="work-act-btn" onclick="moveWork('+i+',1)">↓</button><button class="work-act-btn" onclick="delWork('+i+')">✕</button></div></div></div></div>'}).join('')}
 function toggleCover(el){const ph=el.querySelector('.work-cover-ph'),img=el.querySelector('img');if(el.classList.contains('bili')){el.classList.remove('bili');el.classList.add('off');if(ph)ph.style.display='none';if(img)img.style.display='block'}else{el.classList.remove('off');el.classList.add('bili');if(ph)ph.style.display='flex';if(img)img.style.display='none'}}
-function renderHomeWorks(){const c=document.getElementById('homeWorks');const recent=works.slice(0,4);if(!recent.length){c.innerHTML='<div class="work-empty">鏆傛棤浣滃搧</div>';return}c.innerHTML=recent.map(w=>'<div class="work-thumb">'+(w.cover?'<img src="'+w.cover+'">':'')+'<div class="work-thumb-title">'+w.title+'</div></div>').join('')}
-function openWorkModal(){workImgData='';document.getElementById('workTitle').value='';document.getElementById('workLink').value='';document.getElementById('workPrev').innerHTML='<span class="img-ph">鏈€夋嫨</span>';document.getElementById('workImg').value='';openModal('workModal')}
-function saveWork(){const title=document.getElementById('workTitle').value.trim();if(!title){toast('璇疯緭鍏ユ爣棰?);return}const img=document.getElementById('workPrev').querySelector('img');works.unshift({id:fid(),title,link:document.getElementById('workLink').value.trim(),cover:img?img.src:''});set('works',works);renderWorks();renderHomeWorks();closeModal('workModal');toast('宸叉坊鍔?)}
+function renderHomeWorks(){const c=document.getElementById('homeWorks');const recent=works.slice(0,4);if(!recent.length){c.innerHTML='<div class="work-empty">暂无作品</div>';return}c.innerHTML=recent.map(w=>'<div class="work-thumb">'+(w.cover?'<img src="'+w.cover+'">':'')+'<div class="work-thumb-title">'+w.title+'</div></div>').join('')}
+function openWorkModal(){workImgData='';document.getElementById('workTitle').value='';document.getElementById('workLink').value='';document.getElementById('workPrev').innerHTML='<span class="img-ph">未选择</span>';document.getElementById('workImg').value='';openModal('workModal')}
+function saveWork(){const title=document.getElementById('workTitle').value.trim();if(!title){toast('请输入标题');return}const img=document.getElementById('workPrev').querySelector('img');works.unshift({id:fid(),title,link:document.getElementById('workLink').value.trim(),cover:img?img.src:''});set('works',works);renderWorks();renderHomeWorks();closeModal('workModal');toast('已添加')}
 function delWork(i){works.splice(i,1);set('works',works);renderWorks();renderHomeWorks()}
 function moveWork(i,d){const j=i+d;if(j<0||j>=works.length)return;[works[i],works[j]]=[works[j],works[i]];set('works',works);renderWorks();renderHomeWorks()}
-// 鍥惧簱
+// 图库
 let gallery=[],galImgData='',activeTag='';
 function loadGallery(){gallery=get('gallery',[]);renderGallery();renderHomeGallery();renderTags()}
-function renderTags(){const all=new Set();gallery.forEach(g=>(g.tags||[]).forEach(t=>all.add(t)));const bar=document.getElementById('tagsBar');if(!all.size){bar.innerHTML='';return}bar.innerHTML='<span class="tag-chip '+(activeTag===''?'active':'')+'" onclick="filterTag(\'\')">鍏ㄩ儴</span>'+Array.from(all).map(t=>'<span class="tag-chip '+(activeTag===t?'active':'')+'" onclick="filterTag(\''+t.replace(/'/g,"\\'")+'\')">'+t+'</span>').join('')}
+function renderTags(){const all=new Set();gallery.forEach(g=>(g.tags||[]).forEach(t=>all.add(t)));const bar=document.getElementById('tagsBar');if(!all.size){bar.innerHTML='';return}bar.innerHTML='<span class="tag-chip '+(activeTag===''?'active':'')+'" onclick="filterTag(\'\')">全部</span>'+Array.from(all).map(t=>'<span class="tag-chip '+(activeTag===t?'active':'')+'" onclick="filterTag(\''+t.replace(/'/g,"\\'")+'\')">'+t+'</span>').join('')}
 function filterTag(t){activeTag=t;renderTags();renderGallery()}
 function renderGallery(){const q=document.getElementById('galSearch').value.toLowerCase();let list=gallery.filter(g=>{const ok1=!activeTag||(g.tags||[]).includes(activeTag);const ok2=!q||g.title.toLowerCase().includes(q)||(g.tags||[]).some(t=>t.toLowerCase().includes(q));return ok1&&ok2});
-const c=document.getElementById('galList');if(!list.length){c.innerHTML='<div class="empty"><div class="empty-icon">馃柤锔?/div>鏆傛棤鍥剧墖</div>';return}
-c.innerHTML=list.map(g=>{const i=gallery.indexOf(g);return '<div class="gallery-item"><img src="'+g.src+'" onclick="openLightbox(\''+g.src+'\')"><div class="gallery-item-info"><div class="gallery-item-title">'+g.title+'<span class="gallery-del" onclick="delGal('+i+')">鉁?/span></div><div class="gallery-item-tags">'+(g.tags||[]).map(t=>'<span class="gallery-item-tag">'+t+'</span>').join('')+'</div></div></div>'}).join('')}
+const c=document.getElementById('galList');if(!list.length){c.innerHTML='<div class="empty"><div class="empty-icon">🖼️</div>暂无图片</div>';return}
+c.innerHTML=list.map(g=>{const i=gallery.indexOf(g);return '<div class="gallery-item"><img src="'+g.src+'" onclick="openLightbox(\''+g.src+'\')"><div class="gallery-item-info"><div class="gallery-item-title">'+g.title+'<span class="gallery-del" onclick="delGal('+i+')">✕</span></div><div class="gallery-item-tags">'+(g.tags||[]).map(t=>'<span class="gallery-item-tag">'+t+'</span>').join('')+'</div></div></div>'}).join('')}
 function renderHomeGallery(){const c=document.getElementById('homeGallery');const recent=gallery.slice(0,6);c.innerHTML=recent.map(g=>'<div class="gallery-thumb"><img src="'+g.src+'"></div>').join('')}
-function openGalModal(){galImgData='';document.getElementById('galTitle').value='';document.getElementById('galTags').value='';document.getElementById('galPrev').innerHTML='<span class="img-ph">鏈€夋嫨</span>';document.getElementById('galImg').value='';openModal('galModal')}
-function saveGal(){const img=document.getElementById('galPrev').querySelector('img');if(!img){toast('璇烽€夋嫨鍥剧墖');return}const tags=document.getElementById('galTags').value.split(/[,锛宂/).map(t=>t.trim()).filter(Boolean);gallery.unshift({id:fid(),src:img.src,title:document.getElementById('galTitle').value.trim()||'鏈懡鍚?,tags});set('gallery',gallery);renderGallery();renderHomeGallery();renderTags();closeModal('galModal');toast('宸蹭笂浼?)}
+function openGalModal(){galImgData='';document.getElementById('galTitle').value='';document.getElementById('galTags').value='';document.getElementById('galPrev').innerHTML='<span class="img-ph">未选择</span>';document.getElementById('galImg').value='';openModal('galModal')}
+function saveGal(){const img=document.getElementById('galPrev').querySelector('img');if(!img){toast('请选择图片');return}const tags=document.getElementById('galTags').value.split(/[,，]/).map(t=>t.trim()).filter(Boolean);gallery.unshift({id:fid(),src:img.src,title:document.getElementById('galTitle').value.trim()||'未命名',tags});set('gallery',gallery);renderGallery();renderHomeGallery();renderTags();closeModal('galModal');toast('已上传')}
 function delGal(i){gallery.splice(i,1);set('gallery',gallery);renderGallery();renderHomeGallery();renderTags()}
-// 鏃ュ父
+// 日常
 let blogs=[],blogImgData='';
 function loadBlog(){blogs=get('blogs',[]);renderBlog();renderHomeBlog()}
 function renderBlog(){const q=document.getElementById('blogSearch').value.toLowerCase();const list=blogs.filter(b=>!q||b.date.includes(q)||b.content.toLowerCase().includes(q)).sort((a,b)=>b.date.localeCompare(a.date));
-const c=document.getElementById('blogList');if(!list.length){c.innerHTML='<div class="empty"><div class="empty-icon">馃摑</div>鏆傛棤鏃ュ父</div>';return}
-c.innerHTML=list.map(b=>{const i=blogs.indexOf(b);return '<div class="blog-item" onclick="toggleBlog('+i+',this)"><div class="blog-item-head"><span class="blog-item-date">'+b.date+'</span><span class="blog-item-del" onclick="event.stopPropagation();delBlog('+i+')">鉁?/span></div><div class="blog-item-preview">'+b.content.slice(0,100)+(b.content.length>100?'...':'')+'</div>'+(b.img?'<img class="blog-item-img" src="'+b.img+'" onclick="event.stopPropagation();openLightbox(\''+b.img+'\')">':'')+'</div>'}).join('')}
-function toggleBlog(i,el){const b=blogs[i];const prev=el.querySelector('.blog-item-preview');if(prev){prev.classList.remove('blog-item-preview');prev.classList.add('blog-item-full');prev.textContent=b.content;const hint=document.createElement('div');hint.className='blog-expand';hint.textContent='鐐瑰嚮鏀惰捣';el.appendChild(hint)}else{const full=el.querySelector('.blog-item-full');full.classList.remove('blog-item-full');full.classList.add('blog-item-preview');full.textContent=b.content.slice(0,100)+(b.content.length>100?'...':'');el.querySelector('.blog-expand').remove()}}
-function renderHomeBlog(){const c=document.getElementById('homeBlog');const latest=blogs.slice().sort((a,b)=>b.date.localeCompare(a.date))[0];if(!latest){c.innerHTML='<div class="blog-card-noimg">鏆傛棤鏃ュ父</div>';return}if(latest.img){c.innerHTML='<img class="blog-card-img" src="'+latest.img+'"><div class="blog-card-overlay"><div class="blog-card-date">'+latest.date+'</div><div class="blog-card-text">'+latest.content.slice(0,60)+'</div></div>'}else{c.innerHTML='<div class="blog-card-noimg" style="padding:20px"><div style="color:rgba(255,255,255,.6);font-size:12px;margin-bottom:6px">'+latest.date+'</div><div style="color:#fff;font-size:14px">'+latest.content.slice(0,80)+'</div></div>'}}
-function openBlogModal(){blogImgData='';document.getElementById('blogDate').value=new Date().toISOString().slice(0,10);document.getElementById('blogContent').value='';document.getElementById('blogPrev').innerHTML='<span class="img-ph">鏈€夋嫨</span>';document.getElementById('blogImg').value='';openModal('blogModal')}
-function saveBlog(){const content=document.getElementById('blogContent').value.trim();if(!content){toast('璇疯緭鍏ュ唴瀹?);return}const img=document.getElementById('blogPrev').querySelector('img');blogs.unshift({id:fid(),date:document.getElementById('blogDate').value,content,img:img?img.src:''});set('blogs',blogs);renderBlog();renderHomeBlog();closeModal('blogModal');toast('宸插彂甯?)}
+const c=document.getElementById('blogList');if(!list.length){c.innerHTML='<div class="empty"><div class="empty-icon">📝</div>暂无日常</div>';return}
+c.innerHTML=list.map(b=>{const i=blogs.indexOf(b);return '<div class="blog-item" onclick="toggleBlog('+i+',this)"><div class="blog-item-head"><span class="blog-item-date">'+b.date+'</span><span class="blog-item-del" onclick="event.stopPropagation();delBlog('+i+')">✕</span></div><div class="blog-item-preview">'+b.content.slice(0,100)+(b.content.length>100?'...':'')+'</div>'+(b.img?'<img class="blog-item-img" src="'+b.img+'" onclick="event.stopPropagation();openLightbox(\''+b.img+'\')">':'')+'</div>'}).join('')}
+function toggleBlog(i,el){const b=blogs[i];const prev=el.querySelector('.blog-item-preview');if(prev){prev.classList.remove('blog-item-preview');prev.classList.add('blog-item-full');prev.textContent=b.content;const hint=document.createElement('div');hint.className='blog-expand';hint.textContent='点击收起';el.appendChild(hint)}else{const full=el.querySelector('.blog-item-full');full.classList.remove('blog-item-full');full.classList.add('blog-item-preview');full.textContent=b.content.slice(0,100)+(b.content.length>100?'...':'');el.querySelector('.blog-expand').remove()}}
+function renderHomeBlog(){const c=document.getElementById('homeBlog');const latest=blogs.slice().sort((a,b)=>b.date.localeCompare(a.date))[0];if(!latest){c.innerHTML='<div class="blog-card-noimg">暂无日常</div>';return}if(latest.img){c.innerHTML='<img class="blog-card-img" src="'+latest.img+'"><div class="blog-card-overlay"><div class="blog-card-date">'+latest.date+'</div><div class="blog-card-text">'+latest.content.slice(0,60)+'</div></div>'}else{c.innerHTML='<div class="blog-card-noimg" style="padding:20px"><div style="color:rgba(255,255,255,.6);font-size:12px;margin-bottom:6px">'+latest.date+'</div><div style="color:#fff;font-size:14px">'+latest.content.slice(0,80)+'</div></div>'}}
+function openBlogModal(){blogImgData='';document.getElementById('blogDate').value=new Date().toISOString().slice(0,10);document.getElementById('blogContent').value='';document.getElementById('blogPrev').innerHTML='<span class="img-ph">未选择</span>';document.getElementById('blogImg').value='';openModal('blogModal')}
+function saveBlog(){const content=document.getElementById('blogContent').value.trim();if(!content){toast('请输入内容');return}const img=document.getElementById('blogPrev').querySelector('img');blogs.unshift({id:fid(),date:document.getElementById('blogDate').value,content,img:img?img.src:''});set('blogs',blogs);renderBlog();renderHomeBlog();closeModal('blogModal');toast('已发布')}
 function delBlog(i){blogs.splice(i,1);set('blogs',blogs);renderBlog();renderHomeBlog()}
-// 鏃ュ巻
+// 日历
 let calYear,calMonth,selDate='';
-const moodEmoji={happy:'馃槉',neutral:'馃槓',sad:'馃槩'};
+const moodEmoji={happy:'😊',neutral:'😐',sad:'😢'};
 function loadCal(){const now=new Date();calYear=now.getFullYear();calMonth=now.getMonth();selDate=fmtDate(now)}
 function fmtDate(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
-function renderCal(){document.getElementById('calTitle').textContent=calYear+'骞?+(calMonth+1)+'鏈?;const first=new Date(calYear,calMonth,1);const startDay=first.getDay();const daysInMonth=new Date(calYear,calMonth+1,0).getDate();const prevDays=new Date(calYear,calMonth,0).getDate();const today=fmtDate(new Date());let html='';
+function renderCal(){document.getElementById('calTitle').textContent=calYear+'年'+(calMonth+1)+'月';const first=new Date(calYear,calMonth,1);const startDay=first.getDay();const daysInMonth=new Date(calYear,calMonth+1,0).getDate();const prevDays=new Date(calYear,calMonth,0).getDate();const today=fmtDate(new Date());let html='';
 for(let i=0;i<startDay;i++){const d=prevDays-startDay+1+i;html+='<div class="cal-d-cell other">'+d+'</div>'}
-for(let d=1;d<=daysInMonth;d++){const date=calYear+'-'+String(calMonth+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');const data=get('cal_'+date,{mood:'',scheds:[]});const isToday=date===today,isSel=date===selDate;const star=data.scheds&&data.scheds.some(s=>s.star);html+='<div class="cal-d-cell '+(isToday?'today':'')+' '+(isSel?'selected':'')+'" onclick="selectDate(\''+date+'\')">'+(data.mood?'<span class="d-mood">'+moodEmoji[data.mood]+'</span>':'')+'<span>'+d+'</span>'+(star?'<span class="d-star">猸?/span>':'')+'</div>'}
+for(let d=1;d<=daysInMonth;d++){const date=calYear+'-'+String(calMonth+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');const data=get('cal_'+date,{mood:'',scheds:[]});const isToday=date===today,isSel=date===selDate;const star=data.scheds&&data.scheds.some(s=>s.star);html+='<div class="cal-d-cell '+(isToday?'today':'')+' '+(isSel?'selected':'')+'" onclick="selectDate(\''+date+'\')">'+(data.mood?'<span class="d-mood">'+moodEmoji[data.mood]+'</span>':'')+'<span>'+d+'</span>'+(star?'<span class="d-star">⭐</span>':'')+'</div>'}
 const total=startDay+daysInMonth;const rem=(7-total%7)%7;for(let i=1;i<=rem;i++)html+='<div class="cal-d-cell other">'+i+'</div>';
 document.getElementById('calDays').innerHTML=html;renderHomeCal()}
 function changeMonth(d){calMonth+=d;if(calMonth<0){calMonth=11;calYear--}if(calMonth>11){calMonth=0;calYear++}renderCal()}
 function selectDate(date){selDate=date;renderCal();showDayDetail()}
-function showDayDetail(){const data=get('cal_'+selDate,{mood:'',scheds:[]});const el=document.getElementById('calDayDetail');el.classList.add('show');document.getElementById('calDayTitle').textContent=selDate+' 璇︽儏';
+function showDayDetail(){const data=get('cal_'+selDate,{mood:'',scheds:[]});const el=document.getElementById('calDayDetail');el.classList.add('show');document.getElementById('calDayTitle').textContent=selDate+' 详情';
 document.querySelectorAll('.mood-btn').forEach(b=>b.classList.toggle('active',b.dataset.mood===data.mood));
-const list=document.getElementById('schedList');if(!data.scheds.length){list.innerHTML='<div class="sched-empty">鏆傛棤鏃ョ▼</div>'}else{list.innerHTML=data.scheds.map((s,i)=>'<div class="sched-item"><span class="sched-star '+(s.star?'on':'')+'" onclick="toggleStar('+i+')">猸?/span><span class="sched-text">'+s.text+'</span><span class="sched-del" onclick="delSched('+i+')">鉁?/span></div>').join('')}
+const list=document.getElementById('schedList');if(!data.scheds.length){list.innerHTML='<div class="sched-empty">暂无日程</div>'}else{list.innerHTML=data.scheds.map((s,i)=>'<div class="sched-item"><span class="sched-star '+(s.star?'on':'')+'" onclick="toggleStar('+i+')">⭐</span><span class="sched-text">'+s.text+'</span><span class="sched-del" onclick="delSched('+i+')">✕</span></div>').join('')}
 }
 function setMood(m){const data=get('cal_'+selDate,{mood:'',scheds:[]});data.mood=data.mood===m?'':m;set('cal_'+selDate,data);showDayDetail();renderCal()}
 function addSched(){const inp=document.getElementById('schedInput');const text=inp.value.trim();if(!text)return;const data=get('cal_'+selDate,{mood:'',scheds:[]});data.scheds.push({text,star:false});set('cal_'+selDate,data);inp.value='';showDayDetail();renderCal()}
 function toggleStar(i){const data=get('cal_'+selDate,{mood:'',scheds:[]});data.scheds[i].star=!data.scheds[i].star;set('cal_'+selDate,data);showDayDetail();renderCal()}
 function delSched(i){const data=get('cal_'+selDate,{mood:'',scheds:[]});data.scheds.splice(i,1);set('cal_'+selDate,data);showDayDetail();renderCal()}
-function renderHomeCal(){const now=new Date();const y=now.getFullYear(),m=now.getMonth()+1,d=now.getDate();const wd=['鏃?,'涓€','浜?,'涓?,'鍥?,'浜?,'鍏?][now.getDay()];
-document.getElementById('homeYear').textContent=y;document.getElementById('homeMonth').textContent=m+'鏈?;document.getElementById('homeDay').textContent=d;document.getElementById('homeWeekday').textContent='鏄熸湡'+wd;
-// 鏈懆7澶?const start=new Date(now);start.setDate(now.getDate()-now.getDay());const today=fmtDate(now);let html='';
-for(let i=0;i<7;i++){const day=new Date(start);day.setDate(start.getDate()+i);const date=fmtDate(day);const data=get('cal_'+date,{mood:'',scheds:[]});const isToday=date===today;const star=data.scheds.some(s=>s.star);html+='<div class="cal-cell '+(isToday?'today':'')+'">'+(data.mood?'<span class="mood">'+moodEmoji[data.mood]+'</span>':'')+'<span>'+day.getDate()+'</span>'+(star?'<span class="star">猸?/span>':'')+'</div>'}
+function renderHomeCal(){const now=new Date();const y=now.getFullYear(),m=now.getMonth()+1,d=now.getDate();const wd=['日','一','二','三','四','五','六'][now.getDay()];
+document.getElementById('homeYear').textContent=y;document.getElementById('homeMonth').textContent=m+'月';document.getElementById('homeDay').textContent=d;document.getElementById('homeWeekday').textContent='星期'+wd;
+// 本周7天
+const start=new Date(now);start.setDate(now.getDate()-now.getDay());const today=fmtDate(now);let html='';
+for(let i=0;i<7;i++){const day=new Date(start);day.setDate(start.getDate()+i);const date=fmtDate(day);const data=get('cal_'+date,{mood:'',scheds:[]});const isToday=date===today;const star=data.scheds.some(s=>s.star);html+='<div class="cal-cell '+(isToday?'today':'')+'">'+(data.mood?'<span class="mood">'+moodEmoji[data.mood]+'</span>':'')+'<span>'+day.getDate()+'</span>'+(star?'<span class="star">⭐</span>':'')+'</div>'}
 document.getElementById('homeWeek').innerHTML=html}
-// 寮圭獥
+// 弹窗
 function openModal(id){document.getElementById(id).classList.add('show')}
 function closeModal(id){document.getElementById(id).classList.remove('show')}
 function previewImg(input,prevId){const f=input.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{document.getElementById(prevId).innerHTML='<img src="'+r.result+'">'};r.readAsDataURL(f)}
-// 鐏
+// 灯箱
 function openLightbox(src){document.getElementById('lbImg').src=src;document.getElementById('lightbox').classList.add('show')}
 function closeLightbox(){document.getElementById('lightbox').classList.remove('show')}
-// 鍒锋柊涓婚〉
+// 刷新主页
 function refreshHome(){loadProfile();updatePlayer();renderHomeWorks();renderHomeGallery();renderHomeBlog();renderHomeCal()}
-// 鍒濆鍖?initBg();loadProfile();loadSongs();loadWorks();loadGallery();loadBlog();loadCal();renderHomeCal();
+// 初始化
+initBg();loadProfile();loadSongs();loadWorks();loadGallery();loadBlog();loadCal();renderHomeCal();
 audio.volume=.8;
 </script>
 </body>
