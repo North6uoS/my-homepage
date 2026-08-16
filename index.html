@@ -14,6 +14,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Micr
 .bg-set{position:fixed;top:16px;right:16px;z-index:1000;display:flex;gap:8px;align-items:center}
 .bg-set button,.bg-set label{background:var(--glass);backdrop-filter:blur(10px);border:1px solid var(--border);border-radius:10px;padding:8px 14px;color:#fff;cursor:pointer;font-size:13px}
 .bg-set input[type=range]{width:70px}
+/* 管理员权限控制 */
+body:not(.admin) .admin-only{display:none!important}
 .container{max-width:1200px;margin:0 auto;padding:60px 20px 40px}
 .view{display:none;animation:fade .4s}
 .view.active{display:block}
@@ -21,7 +23,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Micr
 .back{display:inline-flex;align-items:center;gap:6px;background:var(--glass);backdrop-filter:blur(10px);border:1px solid var(--border);border-radius:10px;padding:8px 16px;color:#fff;cursor:pointer;font-size:14px;margin-bottom:20px}
 .page-title{color:#fff;font-size:26px;font-weight:600;margin-bottom:20px;text-shadow:0 2px 10px rgba(0,0,0,.2)}
 /* 主页网格 */
-.home-grid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto 1fr auto;gap:16px;grid-template-areas:"profile music" "works gallery" "works blog" "calendar calendar";min-height:80vh}
+.home-grid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto 1fr 1fr auto;gap:16px;grid-template-areas:"profile music" "works gallery" "works blog" "calendar calendar";min-height:80vh}
 .card{background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:18px;padding:20px;cursor:pointer;transition:.3s;box-shadow:0 8px 32px rgba(0,0,0,.1);overflow:hidden;position:relative}
 .card:hover{transform:translateY(-4px);background:rgba(255,255,255,.22)}
 .card-profile{grid-area:profile}
@@ -46,14 +48,20 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Micr
 .music-cover img{width:100%;height:100%;object-fit:cover}
 .music-info{flex:1;min-width:0;overflow:hidden}
 .music-name{color:#fff;font-size:14px;font-weight:500;white-space:nowrap;overflow:hidden}
-.music-name.scroll{animation:scroll 8s linear infinite}
+.music-name.scroll{animation:scroll 14s linear infinite;animation-delay:2s}
+.music-name.scroll:hover{animation-play-state:paused}
+.music-name.scroll span{display:inline-block;padding-right:80px}
+.music-artist{color:rgba(255,255,255,.6);font-size:11px;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 @keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 .music-progress{height:4px;background:rgba(255,255,255,.2);border-radius:2px;cursor:pointer;position:relative}
 .music-progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:2px;width:0}
 .music-bottom{display:flex;align-items:center;justify-content:space-between}
 .music-ctrls{display:flex;gap:10px;align-items:center}
-.music-btn{background:rgba(255,255,255,.2);border:none;width:30px;height:30px;border-radius:50%;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:12px}
-.music-btn.play{width:36px;height:36px;background:linear-gradient(135deg,var(--accent),var(--accent2));font-size:14px}
+.music-btn{background:rgba(255,255,255,.2);border:none;width:30px;height:30px;border-radius:50%;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:13px;line-height:1;padding:0}
+.music-btn.play{width:38px;height:38px;background:linear-gradient(135deg,var(--accent),var(--accent2));font-size:16px;line-height:1}
+.pause-bars{display:inline-flex;gap:3px;align-items:center;justify-content:center}
+.pause-bars::before,.pause-bars::after{content:'';width:3px;height:14px;background:#fff;border-radius:2px}
+.p-btn.play .pause-bars::before,.p-btn.play .pause-bars::after{width:4px;height:20px;gap:5px}
 .music-vol{display:flex;align-items:center;gap:4px;color:#fff;font-size:12px}
 .music-vol input{width:50px;cursor:pointer}
 /* 作品卡 */
@@ -128,7 +136,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Micr
 .tags-bar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;max-height:60px;overflow-y:auto}
 .tag-chip{background:rgba(99,102,241,.3);color:#fff;padding:4px 10px;border-radius:6px;font-size:12px;cursor:pointer;transition:.2s}
 .tag-chip:hover,.tag-chip.active{background:rgba(99,102,241,.6)}
-.gallery-masonry{columns:4;column-gap:12px}
+.gallery-masonry{columns:4;column-gap:12px;min-height:200px}
 @media(max-width:1024px){.gallery-masonry{columns:3}}
 @media(max-width:640px){.gallery-masonry{columns:2}}
 .gallery-item{break-inside:avoid;margin-bottom:12px;background:rgba(255,255,255,.1);border-radius:10px;overflow:hidden}
@@ -200,8 +208,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Micr
 .player-fill::after{content:'';position:absolute;right:-5px;top:50%;transform:translateY(-50%);width:10px;height:10px;background:#fff;border-radius:50%}
 .player-time{display:flex;justify-content:space-between;color:rgba(255,255,255,.5);font-size:11px;margin-top:5px}
 .player-ctrls{display:flex;justify-content:center;align-items:center;gap:20px;margin-bottom:16px}
-.p-btn{background:rgba(255,255,255,.2);border:none;width:44px;height:44px;border-radius:50%;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px}
-.p-btn.play{width:58px;height:58px;background:linear-gradient(135deg,var(--accent),var(--accent2));font-size:22px}
+.p-btn{background:rgba(255,255,255,.2);border:none;width:44px;height:44px;border-radius:50%;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;line-height:1;padding:0}
+.p-btn.play{width:58px;height:58px;background:linear-gradient(135deg,var(--accent),var(--accent2));font-size:22px;line-height:1}
 .player-vol{display:flex;align-items:center;justify-content:center;gap:8px;color:#fff;font-size:13px}
 .player-vol input{width:100px}
 .playlist-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
@@ -254,6 +262,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Micr
 .link-row{display:flex;gap:8px}
 .link-row input{flex:1}
 .link-go{padding:9px 14px;border-radius:9px;border:1px solid var(--border);background:rgba(255,255,255,.2);color:#fff;cursor:pointer;font-size:13px;white-space:nowrap}
+.qr-upload{display:flex;justify-content:center}
+.qr-preview{width:120px;height:120px;border:2px dashed var(--border);border-radius:10px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.6);font-size:12px;cursor:pointer;background:rgba(255,255,255,.05);overflow:hidden}
+.qr-preview img{width:100%;height:100%;object-fit:cover}
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 </style>
 </head>
@@ -261,8 +272,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Micr
 <div class="bg" id="bg"></div>
 <div class="toast" id="toast"></div>
 <div class="bg-set">
-<label style="display:flex;align-items:center;gap:5px;font-size:12px">透明度<input type="range" id="bgOpacity" min="0.1" max="1" step="0.05" value="0.6"></label>
-<button onclick="document.getElementById('bgFile').click()">🖼️ 背景</button>
+<label class="admin-only" style="display:flex;align-items:center;gap:5px;font-size:12px">透明度<input type="range" id="bgOpacity" min="0.1" max="1" step="0.05" value="0.6"></label>
+<button class="admin-only" onclick="document.getElementById('bgFile').click()">🖼️ 背景</button>
+<button id="adminLoginBtn" onclick="openAdminLogin()">🔑</button>
+<button id="adminLogoutBtn" class="admin-only" onclick="apiLogout()" style="display:none">🚪</button>
 <input type="file" id="bgFile" class="hidden" accept="image/*">
 </div>
 <div class="container">
@@ -280,17 +293,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Micr
 </div>
 </div>
 <div class="card card-music" onclick="showView('music')">
-<div class="music-card-inner" onclick="event.stopPropagation()">
+<div class="music-card-inner" onclick="showView('music')">
 <div class="music-top">
 <div class="music-cover" id="homeMCover">♪</div>
 <div class="music-info">
 <div class="music-name" id="homeMName">暂无歌曲</div>
+<div class="music-artist" id="homeMArtist">添加歌曲开始播放</div>
 </div>
 </div>
 <div class="music-progress" onclick="event.stopPropagation();seekHome(event)">
 <div class="music-progress-fill" id="homeMProg"></div>
 </div>
-<div class="music-bottom">
+<div class="music-bottom" onclick="event.stopPropagation()">
 <div class="music-ctrls">
 <button class="music-btn" onclick="prevSong()">⏮</button>
 <button class="music-btn play" id="homePlayBtn" onclick="togglePlay()">▶</button>
@@ -334,8 +348,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Micr
 <h2 class="page-title">个人资料</h2>
 <div class="panel profile-detail">
 <div class="avatar-lg-wrap">
-<div class="avatar-lg" id="pAvatar" style="background:linear-gradient(135deg,#667eea,#764ba2);display:flex;align-items:center;justify-content:center;color:#fff;font-size:40px" onclick="document.getElementById('avatarFile').click()">👤</div>
-<div class="avatar-edit" onclick="document.getElementById('avatarFile').click()">📷</div>
+<div class="avatar-lg" id="pAvatar" style="background:linear-gradient(135deg,#667eea,#764ba2);display:flex;align-items:center;justify-content:center;color:#fff;font-size:40px">👤</div>
+<div class="avatar-edit admin-only" onclick="document.getElementById('avatarFile').click()">📷</div>
 <input type="file" id="avatarFile" class="hidden" accept="image/*">
 </div>
 <div class="name" id="pNameShow">昵称</div>
@@ -347,8 +361,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Micr
 <div class="field"><label>微信号</label><input type="text" id="pWechat" placeholder="微信"></div>
 </div>
 <div class="field"><label>B站链接</label><div class="link-row"><input type="text" id="pBili" placeholder="https://space.bilibili.com/..."><button class="link-go" onclick="openLink('bili')">跳转 ↗</button></div></div>
-<div class="field"><label>微信公众号</label><div class="link-row"><input type="text" id="pOff" placeholder="公众号链接"><button class="link-go" onclick="openLink('off')">跳转 ↗</button></div></div>
-<button class="save-btn" onclick="saveProfile()">💾 保存</button>
+<div class="field"><label>微信公众号二维码</label><div class="qr-upload"><div class="qr-preview" id="qrPreview" onclick="document.getElementById('qrFile').click()">点击上传二维码</div><input type="file" id="qrFile" class="hidden" accept="image/*"></div></div>
+<button class="save-btn admin-only" onclick="saveProfile()">💾 保存</button>
 </div>
 </div>
 <!-- 音乐 -->
@@ -360,7 +374,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Micr
 <div class="player-main">
 <div class="player-cover" id="pCover">♪</div>
 <div class="player-title" id="pTitle">暂无歌曲</div>
-<div class="player-artist" id="pArtist">导入歌曲开始播放</div>
+<div class="player-artist" id="pArtist">添加歌曲开始播放</div>
 <div class="player-progress">
 <div class="player-track" onclick="seekPlayer(event)"><div class="player-fill" id="pFill"></div></div>
 <div class="player-time"><span id="pCur">0:00</span><span id="pDur">0:00</span></div>
@@ -375,7 +389,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Micr
 <div>
 <div class="playlist-head">
 <div class="playlist-title">歌单</div>
-<button class="import-btn" onclick="document.getElementById('songFile').click()">+ 导入歌曲</button>
+<button class="import-btn admin-only" onclick="openSongModal()">+ 添加歌曲</button>
 <input type="file" id="songFile" class="hidden" accept=".mp3,.m4a,.wav,audio/*" multiple>
 </div>
 <div class="playlist" id="playlist"><div class="pl-empty">暂无歌曲</div></div>
@@ -390,7 +404,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Micr
 <div class="panel">
 <div class="toolbar">
 <div class="search"><input type="text" id="workSearch" placeholder="搜索作品..." oninput="renderWorks()"></div>
-<button class="add-btn" onclick="openWorkModal()">+ 添加作品</button>
+<button class="add-btn admin-only" onclick="openWorkModal()">+ 添加作品</button>
 </div>
 <div class="works-list" id="worksList"><div class="empty"><div class="empty-icon">💼</div>暂无作品</div></div>
 </div>
@@ -402,7 +416,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Micr
 <div class="panel">
 <div class="toolbar">
 <div class="search"><input type="text" id="galSearch" placeholder="搜索标题或标签..." oninput="renderGallery()"></div>
-<button class="add-btn" onclick="openGalModal()">+ 上传图片</button>
+<button class="add-btn admin-only" onclick="openGalModal()">+ 上传图片</button>
 </div>
 <div class="tags-bar" id="tagsBar"></div>
 <div class="gallery-masonry" id="galList"></div>
@@ -415,7 +429,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Micr
 <div class="panel">
 <div class="toolbar">
 <div class="search"><input type="text" id="blogSearch" placeholder="搜索日期或内容..." oninput="renderBlog()"></div>
-<button class="add-btn" onclick="openBlogModal()">+ 发布日常</button>
+<button class="add-btn admin-only" onclick="openBlogModal()">+ 发布日常</button>
 </div>
 <div class="blog-list" id="blogList"><div class="empty"><div class="empty-icon">📝</div>暂无日常</div></div>
 </div>
@@ -439,14 +453,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Micr
 <div class="cal-day-detail" id="calDayDetail">
 <div class="cal-day-detail-title" id="calDayTitle">选择日期</div>
 <div class="mood-btns">
-<button class="mood-btn" data-mood="happy" onclick="setMood('happy')"><span class="emoji">😊</span>高兴</button>
-<button class="mood-btn" data-mood="neutral" onclick="setMood('neutral')"><span class="emoji">😐</span>无感</button>
-<button class="mood-btn" data-mood="sad" onclick="setMood('sad')"><span class="emoji">😢</span>伤心</button>
+<button class="mood-btn admin-only" data-mood="happy" onclick="setMood('happy')"><span class="emoji">😊</span>高兴</button>
+<button class="mood-btn admin-only" data-mood="neutral" onclick="setMood('neutral')"><span class="emoji">😐</span>无感</button>
+<button class="mood-btn admin-only" data-mood="sad" onclick="setMood('sad')"><span class="emoji">😢</span>伤心</button>
 </div>
 <div style="color:rgba(255,255,255,.85);font-size:13px;margin-bottom:8px">日程安排</div>
 <div class="sched-input-row">
 <input type="text" id="schedInput" placeholder="添加日程..." onkeydown="if(event.key==='Enter')addSched()">
-<button class="sched-add" onclick="addSched()">添加</button>
+<button class="sched-add admin-only" onclick="addSched()">添加</button>
 </div>
 <div class="sched-list" id="schedList"><div class="sched-empty">暂无日程</div></div>
 </div>
@@ -460,7 +474,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Micr
 <div class="field"><label>封面图</label><div class="img-preview" id="workPrev"><span class="img-ph">未选择</span></div><label class="file-label">选择图片<input type="file" id="workImg" accept="image/*" onchange="previewImg(this,'workPrev')"></label></div>
 <div class="field"><label>作品标题</label><input type="text" id="workTitle" placeholder="作品标题"></div>
 <div class="field"><label>跳转链接</label><input type="text" id="workLink" placeholder="https://..."></div>
-<div class="modal-actions"><button class="m-btn cancel" onclick="closeModal('workModal')">取消</button><button class="m-btn confirm" onclick="saveWork()">保存</button></div>
+<div class="modal-actions"><button class="m-btn cancel" onclick="closeModal('workModal')">取消</button><button class="m-btn confirm admin-only" onclick="saveWork()">保存</button></div>
 </div>
 </div>
 <!-- 图库弹窗 -->
@@ -470,7 +484,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Micr
 <div class="field"><label>图片</label><div class="img-preview" id="galPrev"><span class="img-ph">未选择</span></div><label class="file-label">选择图片<input type="file" id="galImg" accept="image/*" onchange="previewImg(this,'galPrev')"></label></div>
 <div class="field"><label>标题</label><input type="text" id="galTitle" placeholder="图片标题"></div>
 <div class="field"><label>标签（逗号分隔）</label><input type="text" id="galTags" placeholder="风景, 旅行"></div>
-<div class="modal-actions"><button class="m-btn cancel" onclick="closeModal('galModal')">取消</button><button class="m-btn confirm" onclick="saveGal()">保存</button></div>
+<div class="modal-actions"><button class="m-btn cancel" onclick="closeModal('galModal')">取消</button><button class="m-btn confirm admin-only" onclick="saveGal()">保存</button></div>
 </div>
 </div>
 <!-- 日常弹窗 -->
@@ -480,7 +494,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Micr
 <div class="field"><label>日期</label><input type="date" id="blogDate"></div>
 <div class="field"><label>内容</label><textarea id="blogContent" placeholder="记录生活..."></textarea></div>
 <div class="field"><label>配图（可选）</label><div class="img-preview" id="blogPrev" style="aspect-ratio:auto;max-height:160px"><span class="img-ph">未选择</span></div><label class="file-label">选择图片<input type="file" id="blogImg" accept="image/*" onchange="previewImg(this,'blogPrev')"></label></div>
-<div class="modal-actions"><button class="m-btn cancel" onclick="closeModal('blogModal')">取消</button><button class="m-btn confirm" onclick="saveBlog()">发布</button></div>
+<div class="modal-actions"><button class="m-btn cancel" onclick="closeModal('blogModal')">取消</button><button class="m-btn confirm admin-only" onclick="saveBlog()">发布</button></div>
 </div>
 </div>
 <!-- 歌曲封面弹窗 -->
@@ -490,61 +504,217 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Micr
 <div class="field"><label>歌曲名</label><input type="text" id="editSongName"></div>
 <div class="field"><label>歌手</label><input type="text" id="editSongArtist"></div>
 <div class="field"><label>封面</label><div class="img-preview" id="coverPrev" style="aspect-ratio:1"><span class="img-ph">默认封面</span></div><label class="file-label">上传封面<input type="file" id="coverImg" accept="image/*" onchange="previewImg(this,'coverPrev')"></label></div>
-<div class="modal-actions"><button class="m-btn cancel" onclick="closeModal('coverModal')">取消</button><button class="m-btn confirm" onclick="saveSongEdit()">保存</button></div>
+<div class="modal-actions"><button class="m-btn cancel" onclick="closeModal('coverModal')">取消</button><button class="m-btn confirm admin-only" onclick="saveSongEdit()">保存</button></div>
+</div>
+</div>
+<!-- 添加歌曲弹窗 -->
+<div class="modal" id="songModal">
+<div class="modal-box">
+<div class="modal-title">添加歌曲</div>
+<div class="field"><label>歌曲名</label><input type="text" id="newSongName" placeholder="歌曲名称"></div>
+<div class="field"><label>歌手</label><input type="text" id="newSongArtist" placeholder="歌手名称"></div>
+<div class="field"><label>音频链接（mp3/m4a 直链）</label><input type="text" id="newSongUrl" placeholder="https://.../song.mp3"></div>
+<div class="field"><label>封面链接（可选）</label><input type="text" id="newSongCover" placeholder="https://.../cover.jpg"></div>
+<div class="modal-actions"><button class="m-btn cancel" onclick="closeModal('songModal')">取消</button><button class="m-btn confirm admin-only" onclick="saveNewSong()">添加</button></div>
 </div>
 </div>
 <!-- 灯箱 -->
 <div class="lightbox" id="lightbox" onclick="closeLightbox()"><span class="lightbox-close">×</span><img id="lbImg" src=""></div>
 <audio id="audio"></audio>
 <script>
+// ===== GitHub 后端配置 =====
+const GH_OWNER='North6uoS';
+const GH_REPO='my-homepage';
+const GH_PATH='data.json';
+const GH_BRANCH='main';
+const GH_API='https://api.github.com';
+let isAdmin=false;
+let ghToken='';
+let ghFileSha='';
+let ghDataCache=null;
+// 需要同步的数据key
+const SYNC_KEYS=['profile','works','gallery','blogs','calendar','bgImg','bgOp','songs'];
+// GitHub API 封装
+async function ghGetFile(){
+  try{
+    const url=`${GH_API}/repos/${GH_OWNER}/${GH_REPO}/contents/${GH_PATH}?ref=${GH_BRANCH}`;
+    const headers={'Accept':'application/vnd.github.v3+json'};
+    if(ghToken)headers['Authorization']='token '+ghToken;
+    const r=await fetch(url,{headers});
+    if(r.status===404)return null;
+    const j=await r.json();
+    if(j.content){
+      ghFileSha=j.sha;
+      const content=decodeURIComponent(escape(atob(j.content.replace(/\s/g,''))));
+      ghDataCache=JSON.parse(content);
+      return ghDataCache;
+    }
+    return null;
+  }catch(e){console.log('GitHub读取失败:',e);return null}
+}
+async function ghSetFile(data){
+  if(!isAdmin||!ghToken)return false;
+  try{
+    const content=btoa(unescape(encodeURIComponent(JSON.stringify(data))));
+    const body={message:'update homepage data',content:content,branch:GH_BRANCH};
+    if(ghFileSha)body.sha=ghFileSha;
+    const url=`${GH_API}/repos/${GH_OWNER}/${GH_REPO}/contents/${GH_PATH}`;
+    const r=await fetch(url,{method:'PUT',headers:{'Content-Type':'application/json','Authorization':'token '+ghToken,'Accept':'application/vnd.github.v3+json'},body:JSON.stringify(body)});
+    const j=await r.json();
+    if(j.content&&j.content.sha){ghFileSha=j.content.sha;ghDataCache=data;return true}
+    console.log('GitHub写入返回:',j);
+    return false;
+  }catch(e){console.log('GitHub写入失败:',e);return false}
+}
+// 把GitHub raw URL转换为GitHub Pages加速URL
+function toGhPages(url){
+  if(!url||typeof url!=='string'||!url.startsWith('http'))return url;
+  const rawPrefix=`https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/${GH_BRANCH}/`;
+  const pagesPrefix=`https://${GH_OWNER}.github.io/${GH_REPO}/`;
+  return url.replace(rawPrefix,pagesPrefix);
+}
+// 上传图片文件到GitHub仓库，返回GitHub Pages加速URL
+async function ghUploadImage(folder, dataUrl){
+  if(!isAdmin||!ghToken)return null;
+  try{
+    const ext=(dataUrl.match(/data:image\/(\w+)/)||[,])[1]||'png';
+    const pureB64=dataUrl.includes(',')?dataUrl.split(',')[1]:dataUrl;
+    const fname=folder+'/'+Date.now().toString(36)+Math.random().toString(36).slice(2,6)+'.'+ext;
+    const body={message:'upload '+fname,content:pureB64,branch:GH_BRANCH};
+    const url=`${GH_API}/repos/${GH_OWNER}/${GH_REPO}/contents/${fname}`;
+    const r=await fetch(url,{method:'PUT',headers:{'Content-Type':'application/json','Authorization':'token '+ghToken,'Accept':'application/vnd.github.v3+json'},body:JSON.stringify(body)});
+    const j=await r.json();
+    if(j.content){
+      // 返回GitHub Pages同域URL，比raw.githubusercontent.com快很多
+      return `https://${GH_OWNER}.github.io/${GH_REPO}/${fname}`;
+    }
+    console.log('图片上传返回:',j);
+    return null;
+  }catch(e){console.log('图片上传失败:',e);return null}
+}
+async function ghVerifyToken(token){
+  try{
+    const r=await fetch(`${GH_API}/repos/${GH_OWNER}/${GH_REPO}`,{headers:{'Authorization':'token '+token,'Accept':'application/vnd.github.v3+json'}});
+    if(r.status===200){const j=await r.json();return j.permissions&&j.permissions.push===true}
+    return false;
+  }catch(e){console.log('Token验证失败:',e);return false}
+}
+// 兼容原有接口
+async function apiGet(key){
+  if(ghDataCache&&ghDataCache[key]!==undefined)return ghDataCache[key];
+  const data=await ghGetFile();
+  if(data&&data[key]!==undefined)return data[key];
+  return null;
+}
+async function apiSet(key,value){
+  if(!isAdmin)return false;
+  let data=ghDataCache||await ghGetFile()||{};
+  data[key]=value;
+  return await ghSetFile(data);
+}
+async function apiLogin(token){
+  const ok=await ghVerifyToken(token);
+  if(ok){ghToken=token;isAdmin=true;localStorage.setItem('ghToken',token);return true}
+  return false;
+}
+function apiLogout(){isAdmin=false;ghToken='';ghDataCache=null;ghFileSha='';localStorage.removeItem('ghToken');updateAdminUI();toast('已退出管理员')}
+function checkLocalToken(){const t=localStorage.getItem('ghToken');if(t){ghToken=t;isAdmin=true;return true}return false}
+async function syncToBackend(key){if(!isAdmin)return;const v=get(key,null);if(v!==null){await apiSet(key,v)}}
+async function loadFromBackend(){
+  const data=await ghGetFile();
+  if(!data)return;
+  for(const k of SYNC_KEYS){if(data[k]!==undefined){localStorage.setItem(k,JSON.stringify(data[k]));console.log('已从GitHub加载:',k)}}
+  if(data.calendar&&typeof data.calendar==='object'){for(const d in data.calendar){localStorage.setItem('cal_'+d,JSON.stringify(data.calendar[d]))}}
+}
+function saveCalendarToBackend(){
+  if(!isAdmin)return;
+  const cal={};
+  for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k.startsWith('cal_')){try{cal[k.slice(4)]=JSON.parse(localStorage.getItem(k))}catch(e){}}}
+  apiSet('calendar',cal);
+}
+// 管理员UI更新
+function updateAdminUI(){
+  document.body.classList.toggle('admin',isAdmin);
+  const loginBtn=document.getElementById('adminLoginBtn');
+  if(loginBtn)loginBtn.style.display=isAdmin?'none':'';
+  const logoutBtn=document.getElementById('adminLogoutBtn');
+  if(logoutBtn)logoutBtn.style.display=isAdmin?'':'none';
+}
+// 隐藏登录入口：连续点击头像5次
+let avatarClickCount=0,avatarClickTimer=null;
+function onAvatarClick(){
+  if(isAdmin){document.getElementById('avatarFile').click();return}
+  avatarClickCount++;
+  clearTimeout(avatarClickTimer);
+  avatarClickTimer=setTimeout(()=>avatarClickCount=0,1500);
+  if(avatarClickCount>=5){avatarClickCount=0;openAdminLogin()}
+}
+function openAdminLogin(){
+  const p=prompt('请输入 GitHub Personal Access Token（需要有仓库读写权限）：');
+  if(p===null)return;
+  apiLogin(p).then(ok=>{
+    if(ok){toast('管理员登录成功');updateAdminUI();loadFromBackend().then(()=>toast('数据已同步'))}
+    else{toast('登录失败，请检查Token是否有仓库权限')}
+  }).catch(e=>{toast('网络错误，请检查网络连接')});
+}
 // 工具函数
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2000)}
 function showView(v){document.querySelectorAll('.view').forEach(e=>e.classList.remove('active'));document.getElementById('view-'+v).classList.add('active');window.scrollTo(0,0);if(v==='home')refreshHome();if(v==='calendar')renderCal()}
 function get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}}
-function set(k,v){localStorage.setItem(k,JSON.stringify(v))}
+function set(k,v){
+  try{localStorage.setItem(k,JSON.stringify(v))}catch(e){console.log('localStorage写入失败:',k,e.message);toast('存储空间不足，部分大文件未保存到本地')}
+  // 管理员模式下自动同步到后端
+  if(isAdmin&&SYNC_KEYS.includes(k)){apiSet(k,v).catch(e=>console.log('后端同步失败:',e))}
+  if(isAdmin&&k.startsWith('cal_')){saveCalendarToBackend()}
+}
 function fid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,6)}
 function fmt(s){if(isNaN(s))return'0:00';const m=Math.floor(s/60),x=Math.floor(s%60);return m+':'+(x<10?'0':'')+x}
 function f2b(f){return new Promise((r,j)=>{const a=new FileReader;a.onload=()=>r(a.result);a.onerror=j;a.readAsDataURL(f)})}
 // 背景
 const bg=document.getElementById('bg');
-function initBg(){const b=get('bgImg',''),o=get('bgOp',.6);if(b)bg.style.backgroundImage='url('+b+')';bg.style.opacity=o;document.getElementById('bgOpacity').value=o}
+function initBg(){const b=toGhPages(get('bgImg','')),o=get('bgOp',.6);if(b){bg.style.backgroundImage='url('+b+')';// 预加载确保显示
+  const img=new Image();img.src=b}bg.style.opacity=o;document.getElementById('bgOpacity').value=o}
 document.getElementById('bgOpacity').oninput=e=>{bg.style.opacity=e.target.value;set('bgOp',e.target.value)};
-document.getElementById('bgFile').onchange=async e=>{if(!e.target.files[0])return;const b=await f2b(e.target.files[0]);bg.style.backgroundImage='url('+b+')';set('bgImg',b);toast('背景已更换');e.target.value=''};
+document.getElementById('bgFile').onchange=async e=>{if(!e.target.files[0])return;const b=await f2b(e.target.files[0]);bg.style.backgroundImage='url('+b+')';toast('上传中...');let url=b;if(b.startsWith('data:')){url=await ghUploadImage('images',b);if(url){const img=new Image();img.onload=()=>{bg.style.backgroundImage='url('+url+')';set('bgImg',url);toast('背景已更换')};img.onerror=()=>{set('bgImg',b);toast('背景已更换(本地)')};img.src=url}else{set('bgImg',b);toast('背景已更换(本地)')}}else{set('bgImg',url);toast('背景已更换')}e.target.value=''};
 // 自我介绍
 function loadProfile(){const p=get('profile',{name:'',bio:'',qq:'',wechat:'',bili:'',off:'',avatar:''});
-document.getElementById('pName').value=p.name||'';document.getElementById('pBio').value=p.bio||'';document.getElementById('pQQ').value=p.qq||'';document.getElementById('pWechat').value=p.wechat||'';document.getElementById('pBili').value=p.bili||'';document.getElementById('pOff').value=p.off||'';
+document.getElementById('pName').value=p.name||'';document.getElementById('pBio').value=p.bio||'';document.getElementById('pQQ').value=p.qq||'';document.getElementById('pWechat').value=p.wechat||'';document.getElementById('pBili').value=p.bili||'';
 document.getElementById('pNameShow').textContent=p.name||'昵称';document.getElementById('pBioShow').textContent=p.bio||'个人简介';
-const av=document.getElementById('pAvatar');if(p.avatar)av.innerHTML='<img src="'+p.avatar+'" style="width:100%;height:100%;object-fit:cover;border-radius:50%">';else av.innerHTML='👤';
+const av=document.getElementById('pAvatar');if(p.avatar)av.innerHTML='<img src="'+toGhPages(p.avatar)+'" style="width:100%;height:100%;object-fit:cover;border-radius:50%">';else av.innerHTML='👤';
 // 主页
-const ha=document.getElementById('homeAvatar');if(p.avatar)ha.innerHTML='<img src="'+p.avatar+'" style="width:100%;height:100%;object-fit:cover;border-radius:50%">';else ha.innerHTML='👤';
+const ha=document.getElementById('homeAvatar');if(p.avatar)ha.innerHTML='<img src="'+toGhPages(p.avatar)+'" style="width:100%;height:100%;object-fit:cover;border-radius:50%">';else ha.innerHTML='👤';
 document.getElementById('homeName').textContent=p.name||'设置昵称';document.getElementById('homeBio').textContent=p.bio||'点击编辑个人简介...';
 const sc=document.getElementById('homeSocial');sc.innerHTML='';
-if(p.bili)sc.innerHTML+='<a class="social-icon" href="'+(p.bili.startsWith('http')?p.bili:'https://'+p.bili)+'" target="_blank" onclick="event.stopPropagation()">📺</a>';
-if(p.off)sc.innerHTML+='<a class="social-icon" href="'+(p.off.startsWith('http')?p.off:'https://'+p.off)+'" target="_blank" onclick="event.stopPropagation()">📢</a>';
+if(p.bili)sc.innerHTML+='<a class="social-icon" href="'+(p.bili.startsWith('http')?p.bili:'https://'+p.bili)+'" target="_blank" onclick="event.stopPropagation()" title="B站"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M17.813 4.653h.854c1.51.054 2.769.578 3.773 1.574 1.004.995 1.524 2.249 1.56 3.76v7.36c-.036 1.51-.556 2.769-1.56 3.773s-2.262 1.524-3.773 1.56H5.333c-1.51-.036-2.769-.556-3.773-1.56S.036 18.858 0 17.347v-7.36c.036-1.511.556-2.765 1.56-3.76 1.004-.996 2.262-1.52 3.773-1.574h.774l-1.174-1.12a1.234 1.234 0 0 1-.373-.906c0-.356.124-.658.373-.907l.027-.027c.267-.249.573-.373.92-.373.347 0 .653.124.92.373L9.653 4.44c.071.071.134.142.187.213h4.267a.836.836 0 0 1 .16-.213l2.853-2.747c.267-.249.573-.373.92-.373.347 0 .662.151.929.4.267.249.391.551.391.907 0 .355-.124.657-.373.906zM5.333 7.24c-.746.018-1.373.276-1.88.773-.506.498-.769 1.13-.786 1.894v7.52c.017.764.28 1.395.786 1.893.507.498 1.134.756 1.88.773h13.334c.746-.017 1.373-.275 1.88-.773.506-.498.769-1.129.786-1.893v-7.52c-.017-.765-.28-1.396-.786-1.894-.507-.497-1.134-.755-1.88-.773zM8 11.107c.373 0 .684.124.933.373.25.249.383.569.4.96v1.173c-.017.391-.15.711-.4.96-.249.25-.56.374-.933.374s-.684-.125-.933-.374c-.25-.249-.383-.569-.4-.96V12.44c0-.373.129-.689.387-.947.258-.257.573-.386.946-.386zm8 0c.373 0 .684.124.933.373.25.249.383.569.4.96v1.173c-.017.391-.15.711-.4.96-.249.25-.56.374-.933.374s-.684-.125-.933-.374c-.25-.249-.383-.569-.4-.96V12.44c.017-.391.15-.711.4-.96.249-.249.56-.373.933-.373z" fill="#fb7299"/></svg></a>';
+if(p.off)sc.innerHTML+='<span class="social-icon" onclick="event.stopPropagation();showQR()" title="微信公众号"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M8.691 2.188C3.891 2.188 0 5.476 0 9.53c0 2.212 1.17 4.203 3.002 5.55a.59.59 0 0 1 .213.665l-.39 1.48c-.019.07-.048.141-.048.213 0 .163.13.295.29.295a.326.326 0 0 0 .167-.054l1.903-1.114a.864.864 0 0 1 .717-.098 10.16 10.16 0 0 0 2.837.403c.276 0 .543-.027.811-.05-.857-2.578.157-4.972 1.932-6.446 1.703-1.415 3.882-1.98 5.853-1.838-.576-3.583-4.196-6.348-8.596-6.348zM5.785 5.991c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 0 1-1.162 1.178A1.17 1.17 0 0 1 4.623 7.17c0-.651.52-1.18 1.162-1.18zm5.813 0c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 0 1-1.162 1.178 1.17 1.17 0 0 1-1.162-1.178c0-.651.52-1.18 1.162-1.18zm5.34 2.867c-1.797-.052-3.746.512-5.28 1.786-1.72 1.428-2.687 3.72-1.78 6.22.942 2.453 3.666 4.229 6.884 4.229.826 0 1.622-.12 2.361-.336a.722.722 0 0 1 .598.082l1.584.926a.272.272 0 0 0 .14.047c.134 0 .24-.111.24-.247 0-.06-.023-.12-.038-.177l-.327-1.233a.582.582 0 0 1-.023-.156.49.49 0 0 1 .201-.398C23.024 18.48 24 16.82 24 14.98c0-3.21-2.931-5.837-6.656-6.088V8.89c-.135-.01-.27-.027-.407-.03zm-2.53 3.274c.535 0 .969.44.969.982a.976.976 0 0 1-.969.983.976.976 0 0 1-.969-.983c0-.542.434-.982.97-.982zm4.844 0c.535 0 .969.44.969.982a.976.976 0 0 1-.969.983.976.976 0 0 1-.969-.983c0-.542.434-.982.969-.982z" fill="#07c160"/></svg></span>';
+const qp=document.getElementById('qrPreview');if(qp){if(p.off)qp.innerHTML='<img src="'+toGhPages(p.off)+'">';else qp.innerHTML='点击上传二维码'}
 }
-function saveProfile(){const p={name:document.getElementById('pName').value.trim(),bio:document.getElementById('pBio').value.trim(),qq:document.getElementById('pQQ').value.trim(),wechat:document.getElementById('pWechat').value.trim(),bili:document.getElementById('pBili').value.trim(),off:document.getElementById('pOff').value.trim(),avatar:get('profile',{}).avatar||''};set('profile',p);loadProfile();toast('已保存')}
-document.getElementById('avatarFile').onchange=async e=>{if(!e.target.files[0])return;const b=await f2b(e.target.files[0]);const p=get('profile',{});p.avatar=b;set('profile',p);loadProfile();toast('头像已更新');e.target.value=''};
-function openLink(t){const p=get('profile',{});let u=t==='bili'?p.bili:p.off;if(!u){toast('请先填写链接');return}if(!u.startsWith('http'))u='https://'+u;window.open(u,'_blank')}
+function showQR(){const p=get('profile',{});if(p.off)openLightbox(toGhPages(p.off))}
+function saveProfile(){const p={name:document.getElementById('pName').value.trim(),bio:document.getElementById('pBio').value.trim(),qq:document.getElementById('pQQ').value.trim(),wechat:document.getElementById('pWechat').value.trim(),bili:document.getElementById('pBili').value.trim(),off:get('profile',{}).off||'',avatar:get('profile',{}).avatar||''};set('profile',p);loadProfile();refreshHome();toast('已保存')}
+document.getElementById('avatarFile').onchange=async e=>{if(!e.target.files[0])return;const b=await f2b(e.target.files[0]);toast('上传中...');let url=b;if(b.startsWith('data:')){url=await ghUploadImage('images',b);if(!url){toast('头像上传失败');return}}const p=get('profile',{});p.avatar=url;set('profile',p);loadProfile();refreshHome();toast('头像已更新');e.target.value=''};
+document.getElementById('qrFile').onchange=async e=>{if(!e.target.files[0])return;const b=await f2b(e.target.files[0]);toast('上传中...');let url=b;if(b.startsWith('data:')){url=await ghUploadImage('images',b);if(!url){toast('二维码上传失败');return}}const p=get('profile',{});p.off=url;set('profile',p);loadProfile();refreshHome();toast('二维码已更新');e.target.value=''};
+function openLink(t){const p=get('profile',{});let u=t==='bili'?p.bili:'';if(!u){toast('请先填写链接');return}if(!u.startsWith('http'))u='https://'+u;window.open(u,'_blank')}
 // 音乐
 let songs=[],curIdx=-1,playing=false;
 const audio=document.getElementById('audio');
-function loadSongs(){songs=get('songs',[]);curIdx=get('curSong',-1);if(curIdx>=songs.length)curIdx=-1;renderPlaylist();updatePlayer()}
+function loadSongs(){songs=get('songs',[]);curIdx=get('curSong',-1);if(curIdx>=songs.length)curIdx=-1;if(curIdx>=0&&songs[curIdx]){audio.src=songs[curIdx].url||songs[curIdx].data||''}renderPlaylist();updatePlayer()}
 function renderPlaylist(){const c=document.getElementById('playlist');if(!songs.length){c.innerHTML='<div class="pl-empty">暂无歌曲</div>';return}
 c.innerHTML=songs.map((s,i)=>'<div class="pl-item '+(i===curIdx?'active':'')+'" onclick="playSong('+i+')">'+
-'<div class="pl-cover">'+(s.cover?'<img src="'+s.cover+'">':'♪')+'</div>'+
+'<div class="pl-cover">'+(s.cover?'<img src="'+toGhPages(s.cover)+'">':'♪')+'</div>'+
 '<div class="pl-info"><div class="pl-name" onclick="event.stopPropagation();openEditSong('+i+')">'+s.name+'</div><div class="pl-artist">'+(s.artist||'未知')+'</div></div>'+
-'<div class="pl-actions"><button class="pl-act" onclick="event.stopPropagation();moveSong('+i+',-1)" title="上移">↑</button><button class="pl-act" onclick="event.stopPropagation();moveSong('+i+',1)" title="下移">↓</button><button class="pl-act" onclick="event.stopPropagation();delSong('+i+')" title="删除">✕</button></div></div>').join('')}
-function updatePlayer(){const s=songs[curIdx];const tn=s?s.name:'暂无歌曲',ta=s?(s.artist||'未知歌手'):'导入歌曲开始播放';
+'<div class="pl-actions"><button class="pl-act admin-only" onclick="event.stopPropagation();moveSong('+i+',-1)" title="上移">↑</button><button class="pl-act admin-only" onclick="event.stopPropagation();moveSong('+i+',1)" title="下移">↓</button><button class="pl-act admin-only" onclick="event.stopPropagation();delSong('+i+')" title="删除">✕</button></div></div>').join('')}
+function updatePlayer(){const s=songs[curIdx];const tn=s?s.name:'暂无歌曲',ta=s?(s.artist||'未知歌手'):'添加歌曲开始播放';
 document.getElementById('pTitle').textContent=tn;document.getElementById('pArtist').textContent=ta;
-document.getElementById('homeMName').textContent=tn;
+document.getElementById('homeMName').textContent=tn;document.getElementById('homeMArtist').textContent=ta;
 const pc=document.getElementById('pCover'),hc=document.getElementById('homeMCover');
-if(s&&s.cover){pc.innerHTML='<img src="'+s.cover+'">';hc.innerHTML='<img src="'+s.cover+'">'}else{pc.innerHTML='♪';hc.innerHTML='♪'}
-document.getElementById('pPlayBtn').textContent=playing?'⏸':'▶';document.getElementById('homePlayBtn').textContent=playing?'⏸':'▶';
-// 滚动
-const hn=document.getElementById('homeMName');if(tn.length>8){hn.classList.add('scroll');hn.innerHTML=tn+'　　　'+tn}else{hn.classList.remove('scroll');hn.textContent=tn}
+if(s&&s.cover){const cover=toGhPages(s.cover);pc.innerHTML='<img src="'+cover+'">';hc.innerHTML='<img src="'+cover+'">'}else{pc.innerHTML='♪';hc.innerHTML='♪'}
+document.getElementById('pPlayBtn').innerHTML=playing?'<span class="pause-bars"></span>':'▶';document.getElementById('homePlayBtn').innerHTML=playing?'<span class="pause-bars"></span>':'▶';
+// 滚动：实际测量宽度，溢出才滚动
+const hn=document.getElementById('homeMName');hn.classList.remove('scroll');hn.textContent=tn;
+requestAnimationFrame(()=>{if(hn.scrollWidth>hn.clientWidth+2){hn.innerHTML='<span>'+tn+'</span><span>'+tn+'</span>';hn.classList.add('scroll')}else{hn.textContent=tn}});
 }
-function playSong(i){if(i<0||i>=songs.length)return;curIdx=i;set('curSong',i);audio.src=songs[i].data;audio.play().then(()=>playing=true).catch(()=>playing=false);updatePlayer();renderPlaylist()}
-function togglePlay(){if(!songs.length){toast('请先导入歌曲');return}if(curIdx===-1){playSong(0);return}if(playing){audio.pause();playing=false}else{audio.play().catch(()=>{});playing=true}updatePlayer()}
+function playSong(i){if(i<0||i>=songs.length)return;curIdx=i;set('curSong',i);audio.src=songs[i].url||songs[i].data;audio.play().then(()=>playing=true).catch(()=>playing=false);updatePlayer();renderPlaylist()}
+function togglePlay(){if(!songs.length){toast('请先添加歌曲');return}if(curIdx===-1){playSong(0);return}if(playing){audio.pause();playing=false}else{audio.play().catch(()=>{});playing=true}updatePlayer()}
 function prevSong(){if(!songs.length)return;playSong((curIdx-1+songs.length)%songs.length)}
 function nextSong(){if(!songs.length)return;playSong((curIdx+1)%songs.length)}
 function delSong(i){songs.splice(i,1);set('songs',songs);if(i===curIdx){audio.pause();playing=false;curIdx=-1;set('curSong',-1)}else if(i<curIdx){curIdx--;set('curSong',curIdx)}renderPlaylist();updatePlayer();toast('已删除')}
@@ -552,6 +722,8 @@ function moveSong(i,d){const j=i+d;if(j<0||j>=songs.length)return;[songs[i],song
 let editIdx=-1;
 function openEditSong(i){editIdx=i;document.getElementById('editSongName').value=songs[i].name;document.getElementById('editSongArtist').value=songs[i].artist||'';document.getElementById('coverPrev').innerHTML=songs[i].cover?'<img src="'+songs[i].cover+'">':'<span class="img-ph">默认封面</span>';document.getElementById('coverImg').value='';openModal('coverModal')}
 function saveSongEdit(){if(editIdx<0)return;songs[editIdx].name=document.getElementById('editSongName').value.trim()||'未命名';songs[editIdx].artist=document.getElementById('editSongArtist').value.trim();const cp=document.getElementById('coverPrev').querySelector('img');if(cp)songs[editIdx].cover=cp.src;set('songs',songs);renderPlaylist();updatePlayer();closeModal('coverModal');toast('已保存')}
+function openSongModal(){document.getElementById('newSongName').value='';document.getElementById('newSongArtist').value='';document.getElementById('newSongUrl').value='';document.getElementById('newSongCover').value='';openModal('songModal')}
+function saveNewSong(){const name=document.getElementById('newSongName').value.trim();const url=document.getElementById('newSongUrl').value.trim();if(!name){toast('请输入歌曲名');return}if(!url){toast('请输入音频链接');return}songs.push({id:fid(),name,artist:document.getElementById('newSongArtist').value.trim()||'未知',url,cover:document.getElementById('newSongCover').value.trim()||''});set('songs',songs);renderPlaylist();closeModal('songModal');toast('已添加')}
 document.getElementById('songFile').onchange=async e=>{const fs=Array.from(e.target.files);for(const f of fs){const b=await f2b(f);songs.push({id:fid(),name:f.name.replace(/\.[^.]+$/,''),artist:'本地音乐',data:b,cover:''})}set('songs',songs);renderPlaylist();toast('导入'+fs.length+'首');e.target.value=''};
 audio.ontimeupdate=()=>{const p=(audio.currentTime/audio.duration)*100||0;document.getElementById('pFill').style.width=p+'%';document.getElementById('homeMProg').style.width=p+'%';document.getElementById('pCur').textContent=fmt(audio.currentTime)};
 audio.onloadedmetadata=()=>document.getElementById('pDur').textContent=fmt(audio.duration);
@@ -564,11 +736,11 @@ let works=[],workImgData='';
 function loadWorks(){works=get('works',[]);renderWorks();renderHomeWorks()}
 function renderWorks(){const q=document.getElementById('workSearch').value.toLowerCase();const list=works.filter(w=>w.title.toLowerCase().includes(q));const c=document.getElementById('worksList');
 if(!list.length){c.innerHTML='<div class="empty"><div class="empty-icon">💼</div>暂无作品</div>';return}
-c.innerHTML=list.map((w)=>{const i=works.indexOf(w);return '<div class="work-card"><div class="work-cover bili" onclick="toggleCover(this)"><div class="work-cover-ph">💼</div>'+(w.cover?'<img src="'+w.cover+'" style="display:none">':'')+'</div><div class="work-info"><div class="work-title">'+w.title+'</div><div class="work-row"><a class="work-link" href="'+(w.link||'#')+'" target="_blank" onclick="event.stopPropagation()">跳转 ↗</a><div class="work-actions"><button class="work-act-btn" onclick="moveWork('+i+',-1)">↑</button><button class="work-act-btn" onclick="moveWork('+i+',1)">↓</button><button class="work-act-btn" onclick="delWork('+i+')">✕</button></div></div></div></div>'}).join('')}
+c.innerHTML=list.map((w)=>{const i=works.indexOf(w);const cover=toGhPages(w.cover);return '<div class="work-card"><div class="work-cover bili" onclick="toggleCover(this)"><div class="work-cover-ph" style="'+(cover?'display:none':'')+'">💼</div>'+(cover?'<img src="'+cover+'" style="display:block">':'')+'</div><div class="work-info"><div class="work-title">'+w.title+'</div><div class="work-row"><a class="work-link" href="'+(w.link||'#')+'" target="_blank" onclick="event.stopPropagation()">跳转 ↗</a><div class="work-actions"><button class="work-act-btn admin-only" onclick="moveWork('+i+',-1)">↑</button><button class="work-act-btn admin-only" onclick="moveWork('+i+',1)">↓</button><button class="work-act-btn admin-only" onclick="delWork('+i+')">✕</button></div></div></div></div>'}).join('')}
 function toggleCover(el){const ph=el.querySelector('.work-cover-ph'),img=el.querySelector('img');if(el.classList.contains('bili')){el.classList.remove('bili');el.classList.add('off');if(ph)ph.style.display='none';if(img)img.style.display='block'}else{el.classList.remove('off');el.classList.add('bili');if(ph)ph.style.display='flex';if(img)img.style.display='none'}}
-function renderHomeWorks(){const c=document.getElementById('homeWorks');const recent=works.slice(0,4);if(!recent.length){c.innerHTML='<div class="work-empty">暂无作品</div>';return}c.innerHTML=recent.map(w=>'<div class="work-thumb">'+(w.cover?'<img src="'+w.cover+'">':'')+'<div class="work-thumb-title">'+w.title+'</div></div>').join('')}
+function renderHomeWorks(){const c=document.getElementById('homeWorks');const recent=works.slice(0,4);if(!recent.length){c.innerHTML='<div class="work-empty">暂无作品</div>';return}c.innerHTML=recent.map(w=>'<div class="work-thumb">'+(w.cover?'<img src="'+toGhPages(w.cover)+'">':'')+'<div class="work-thumb-title">'+w.title+'</div></div>').join('')}
 function openWorkModal(){workImgData='';document.getElementById('workTitle').value='';document.getElementById('workLink').value='';document.getElementById('workPrev').innerHTML='<span class="img-ph">未选择</span>';document.getElementById('workImg').value='';openModal('workModal')}
-function saveWork(){const title=document.getElementById('workTitle').value.trim();if(!title){toast('请输入标题');return}const img=document.getElementById('workPrev').querySelector('img');works.unshift({id:fid(),title,link:document.getElementById('workLink').value.trim(),cover:img?img.src:''});set('works',works);renderWorks();renderHomeWorks();closeModal('workModal');toast('已添加')}
+async function saveWork(){const title=document.getElementById('workTitle').value.trim();if(!title){toast('请输入标题');return}const img=document.getElementById('workPrev').querySelector('img');let cover='';if(img){toast('上传中...');cover=img.src;if(cover.startsWith('data:')){cover=await ghUploadImage('images/works',cover);if(!cover){toast('封面上传失败');return}}}works.unshift({id:fid(),title,link:document.getElementById('workLink').value.trim(),cover});set('works',works);renderWorks();renderHomeWorks();closeModal('workModal');toast('已添加')}
 function delWork(i){works.splice(i,1);set('works',works);renderWorks();renderHomeWorks()}
 function moveWork(i,d){const j=i+d;if(j<0||j>=works.length)return;[works[i],works[j]]=[works[j],works[i]];set('works',works);renderWorks();renderHomeWorks()}
 // 图库
@@ -578,21 +750,21 @@ function renderTags(){const all=new Set();gallery.forEach(g=>(g.tags||[]).forEac
 function filterTag(t){activeTag=t;renderTags();renderGallery()}
 function renderGallery(){const q=document.getElementById('galSearch').value.toLowerCase();let list=gallery.filter(g=>{const ok1=!activeTag||(g.tags||[]).includes(activeTag);const ok2=!q||g.title.toLowerCase().includes(q)||(g.tags||[]).some(t=>t.toLowerCase().includes(q));return ok1&&ok2});
 const c=document.getElementById('galList');if(!list.length){c.innerHTML='<div class="empty"><div class="empty-icon">🖼️</div>暂无图片</div>';return}
-c.innerHTML=list.map(g=>{const i=gallery.indexOf(g);return '<div class="gallery-item"><img src="'+g.src+'" onclick="openLightbox(\''+g.src+'\')"><div class="gallery-item-info"><div class="gallery-item-title">'+g.title+'<span class="gallery-del" onclick="delGal('+i+')">✕</span></div><div class="gallery-item-tags">'+(g.tags||[]).map(t=>'<span class="gallery-item-tag">'+t+'</span>').join('')+'</div></div></div>'}).join('')}
-function renderHomeGallery(){const c=document.getElementById('homeGallery');const recent=gallery.slice(0,6);c.innerHTML=recent.map(g=>'<div class="gallery-thumb"><img src="'+g.src+'"></div>').join('')}
+c.innerHTML=list.map(g=>{const i=gallery.indexOf(g);const src=toGhPages(g.src);return '<div class="gallery-item"><img src="'+src+'" onclick="openLightbox(\''+src+'\')"><div class="gallery-item-info"><div class="gallery-item-title">'+g.title+'<span class="gallery-del admin-only" onclick="delGal('+i+')">✕</span></div><div class="gallery-item-tags">'+(g.tags||[]).map(t=>'<span class="gallery-item-tag">'+t+'</span>').join('')+'</div></div></div>'}).join('')}
+function renderHomeGallery(){const c=document.getElementById('homeGallery');const recent=gallery.slice(0,6);c.innerHTML=recent.map(g=>'<div class="gallery-thumb"><img src="'+toGhPages(g.src)+'"></div>').join('')}
 function openGalModal(){galImgData='';document.getElementById('galTitle').value='';document.getElementById('galTags').value='';document.getElementById('galPrev').innerHTML='<span class="img-ph">未选择</span>';document.getElementById('galImg').value='';openModal('galModal')}
-function saveGal(){const img=document.getElementById('galPrev').querySelector('img');if(!img){toast('请选择图片');return}const tags=document.getElementById('galTags').value.split(/[,，]/).map(t=>t.trim()).filter(Boolean);gallery.unshift({id:fid(),src:img.src,title:document.getElementById('galTitle').value.trim()||'未命名',tags});set('gallery',gallery);renderGallery();renderHomeGallery();renderTags();closeModal('galModal');toast('已上传')}
+async function saveGal(){const img=document.getElementById('galPrev').querySelector('img');if(!img){toast('请选择图片');return}toast('上传中...');const tags=document.getElementById('galTags').value.split(/[,，]/).map(t=>t.trim()).filter(Boolean);let imgUrl=img.src;if(img.src.startsWith('data:')){imgUrl=await ghUploadImage('images/gallery',img.src);if(!imgUrl){toast('图片上传失败，请重试');return}}gallery.unshift({id:fid(),src:imgUrl,title:document.getElementById('galTitle').value.trim()||'未命名',tags});set('gallery',gallery);renderGallery();renderHomeGallery();renderTags();closeModal('galModal');toast('已上传')}
 function delGal(i){gallery.splice(i,1);set('gallery',gallery);renderGallery();renderHomeGallery();renderTags()}
 // 日常
 let blogs=[],blogImgData='';
 function loadBlog(){blogs=get('blogs',[]);renderBlog();renderHomeBlog()}
 function renderBlog(){const q=document.getElementById('blogSearch').value.toLowerCase();const list=blogs.filter(b=>!q||b.date.includes(q)||b.content.toLowerCase().includes(q)).sort((a,b)=>b.date.localeCompare(a.date));
 const c=document.getElementById('blogList');if(!list.length){c.innerHTML='<div class="empty"><div class="empty-icon">📝</div>暂无日常</div>';return}
-c.innerHTML=list.map(b=>{const i=blogs.indexOf(b);return '<div class="blog-item" onclick="toggleBlog('+i+',this)"><div class="blog-item-head"><span class="blog-item-date">'+b.date+'</span><span class="blog-item-del" onclick="event.stopPropagation();delBlog('+i+')">✕</span></div><div class="blog-item-preview">'+b.content.slice(0,100)+(b.content.length>100?'...':'')+'</div>'+(b.img?'<img class="blog-item-img" src="'+b.img+'" onclick="event.stopPropagation();openLightbox(\''+b.img+'\')">':'')+'</div>'}).join('')}
+c.innerHTML=list.map(b=>{const i=blogs.indexOf(b);const img=toGhPages(b.img);return '<div class="blog-item" onclick="toggleBlog('+i+',this)"><div class="blog-item-head"><span class="blog-item-date">'+b.date+'</span><span class="blog-item-del admin-only" onclick="event.stopPropagation();delBlog('+i+')">✕</span></div><div class="blog-item-preview">'+b.content.slice(0,100)+(b.content.length>100?'...':'')+'</div>'+(img?'<img class="blog-item-img" src="'+img+'" onclick="event.stopPropagation();openLightbox(\''+img+'\')">':'')+'</div>'}).join('')}
 function toggleBlog(i,el){const b=blogs[i];const prev=el.querySelector('.blog-item-preview');if(prev){prev.classList.remove('blog-item-preview');prev.classList.add('blog-item-full');prev.textContent=b.content;const hint=document.createElement('div');hint.className='blog-expand';hint.textContent='点击收起';el.appendChild(hint)}else{const full=el.querySelector('.blog-item-full');full.classList.remove('blog-item-full');full.classList.add('blog-item-preview');full.textContent=b.content.slice(0,100)+(b.content.length>100?'...':'');el.querySelector('.blog-expand').remove()}}
-function renderHomeBlog(){const c=document.getElementById('homeBlog');const latest=blogs.slice().sort((a,b)=>b.date.localeCompare(a.date))[0];if(!latest){c.innerHTML='<div class="blog-card-noimg">暂无日常</div>';return}if(latest.img){c.innerHTML='<img class="blog-card-img" src="'+latest.img+'"><div class="blog-card-overlay"><div class="blog-card-date">'+latest.date+'</div><div class="blog-card-text">'+latest.content.slice(0,60)+'</div></div>'}else{c.innerHTML='<div class="blog-card-noimg" style="padding:20px"><div style="color:rgba(255,255,255,.6);font-size:12px;margin-bottom:6px">'+latest.date+'</div><div style="color:#fff;font-size:14px">'+latest.content.slice(0,80)+'</div></div>'}}
+function renderHomeBlog(){const c=document.getElementById('homeBlog');const latest=blogs.slice().sort((a,b)=>b.date.localeCompare(a.date))[0];if(!latest){c.innerHTML='<div class="blog-card-noimg">暂无日常</div>';return}const img=toGhPages(latest.img);if(img){c.innerHTML='<img class="blog-card-img" src="'+img+'"><div class="blog-card-overlay"><div class="blog-card-date">'+latest.date+'</div><div class="blog-card-text">'+latest.content.slice(0,60)+'</div></div>'}else{c.innerHTML='<div class="blog-card-noimg" style="padding:20px"><div style="color:rgba(255,255,255,.6);font-size:12px;margin-bottom:6px">'+latest.date+'</div><div style="color:#fff;font-size:14px">'+latest.content.slice(0,80)+'</div></div>'}}
 function openBlogModal(){blogImgData='';document.getElementById('blogDate').value=new Date().toISOString().slice(0,10);document.getElementById('blogContent').value='';document.getElementById('blogPrev').innerHTML='<span class="img-ph">未选择</span>';document.getElementById('blogImg').value='';openModal('blogModal')}
-function saveBlog(){const content=document.getElementById('blogContent').value.trim();if(!content){toast('请输入内容');return}const img=document.getElementById('blogPrev').querySelector('img');blogs.unshift({id:fid(),date:document.getElementById('blogDate').value,content,img:img?img.src:''});set('blogs',blogs);renderBlog();renderHomeBlog();closeModal('blogModal');toast('已发布')}
+async function saveBlog(){const content=document.getElementById('blogContent').value.trim();if(!content){toast('请输入内容');return}const img=document.getElementById('blogPrev').querySelector('img');let imgUrl='';if(img){toast('上传中...');imgUrl=img.src;if(imgUrl.startsWith('data:')){imgUrl=await ghUploadImage('images/blogs',imgUrl);if(!imgUrl){toast('图片上传失败');return}}}blogs.unshift({id:fid(),date:document.getElementById('blogDate').value,content,img:imgUrl});set('blogs',blogs);renderBlog();renderHomeBlog();closeModal('blogModal');toast('已发布')}
 function delBlog(i){blogs.splice(i,1);set('blogs',blogs);renderBlog();renderHomeBlog()}
 // 日历
 let calYear,calMonth,selDate='';
@@ -608,7 +780,7 @@ function changeMonth(d){calMonth+=d;if(calMonth<0){calMonth=11;calYear--}if(calM
 function selectDate(date){selDate=date;renderCal();showDayDetail()}
 function showDayDetail(){const data=get('cal_'+selDate,{mood:'',scheds:[]});const el=document.getElementById('calDayDetail');el.classList.add('show');document.getElementById('calDayTitle').textContent=selDate+' 详情';
 document.querySelectorAll('.mood-btn').forEach(b=>b.classList.toggle('active',b.dataset.mood===data.mood));
-const list=document.getElementById('schedList');if(!data.scheds.length){list.innerHTML='<div class="sched-empty">暂无日程</div>'}else{list.innerHTML=data.scheds.map((s,i)=>'<div class="sched-item"><span class="sched-star '+(s.star?'on':'')+'" onclick="toggleStar('+i+')">⭐</span><span class="sched-text">'+s.text+'</span><span class="sched-del" onclick="delSched('+i+')">✕</span></div>').join('')}
+const list=document.getElementById('schedList');if(!data.scheds.length){list.innerHTML='<div class="sched-empty">暂无日程</div>'}else{list.innerHTML=data.scheds.map((s,i)=>'<div class="sched-item"><span class="sched-star admin-only '+(s.star?'on':'')+'" onclick="toggleStar('+i+')">⭐</span><span class="sched-text">'+s.text+'</span><span class="sched-del admin-only" onclick="delSched('+i+')">✕</span></div>').join('')}
 }
 function setMood(m){const data=get('cal_'+selDate,{mood:'',scheds:[]});data.mood=data.mood===m?'':m;set('cal_'+selDate,data);showDayDetail();renderCal()}
 function addSched(){const inp=document.getElementById('schedInput');const text=inp.value.trim();if(!text)return;const data=get('cal_'+selDate,{mood:'',scheds:[]});data.scheds.push({text,star:false});set('cal_'+selDate,data);inp.value='';showDayDetail();renderCal()}
@@ -630,8 +802,27 @@ function closeLightbox(){document.getElementById('lightbox').classList.remove('s
 // 刷新主页
 function refreshHome(){loadProfile();updatePlayer();renderHomeWorks();renderHomeGallery();renderHomeBlog();renderHomeCal()}
 // 初始化
-initBg();loadProfile();loadSongs();loadWorks();loadGallery();loadBlog();loadCal();renderHomeCal();
-audio.volume=.8;
+async function initApp(){
+  try{
+    checkLocalToken();
+    updateAdminUI();
+    await loadFromBackend();
+  }catch(e){console.log('后端加载失败:',e)}
+  try{initBg()}catch(e){console.log('背景初始化失败:',e)}
+  try{loadProfile()}catch(e){console.log('个人资料初始化失败:',e)}
+  try{loadSongs()}catch(e){console.log('音乐初始化失败:',e)}
+  try{loadWorks()}catch(e){console.log('作品初始化失败:',e)}
+  try{loadGallery()}catch(e){console.log('图库初始化失败:',e)}
+  try{loadBlog()}catch(e){console.log('日常初始化失败:',e)}
+  try{loadCal();renderHomeCal()}catch(e){console.log('日历初始化失败:',e)}
+  audio.volume=.8;
+  const av=document.getElementById('homeAvatar');
+  if(av)av.addEventListener('click',onAvatarClick);
+  const pAv=document.getElementById('pAvatar');
+  if(pAv)pAv.addEventListener('click',onAvatarClick);
+  toast('数据已同步');
+}
+initApp();
 </script>
 </body>
 </html>
